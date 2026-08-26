@@ -93,10 +93,10 @@ npm run setup        # Init DB schema
 npm run test:all     # Verify all tests run (they should fail — that's correct)
 ```
 
-### Step 7 — Start Rovo Dev
+### Step 7 — Start an AI coding agent
 ```bash
 # Always on port 9050 — never change this
-acli rovodev serve 9050
+your-agent-cli agent serve 9050
 
 # Verify it's healthy
 curl http://localhost:9050/healthcheck
@@ -104,14 +104,14 @@ curl http://localhost:9050/healthcheck
 # Start your server
 node server.js
 
-# Adopt the Rovo Dev session
-curl -X POST http://localhost:4000/api/rovodev/global-start
+# Adopt the AI coding agent session
+curl -X POST http://localhost:4000/api/agent/global-start
 ```
 
 ### Step 8 — Create Your First Story and Run It
 ```bash
 # Via the UI at http://localhost:4000
-# 1. Create a story with jira_key, title, and description
+# 1. Create a story with work_item_key, title, and description
 # 2. Assign workflow: plan-execute-review (for coding) or design-with-nfr-flow (for design)
 # 3. Click "Start Workflow" or via API:
 
@@ -244,11 +244,11 @@ node server.js
 # Run all tests  
 npm run test:all
 
-# Start Rovo Dev (always port 9050)
-acli rovodev serve 9050
+# Start your AI coding agent
+your-agent-cli agent serve 9050
 
-# Adopt existing Rovo Dev session
-curl -X POST http://localhost:4000/api/rovodev/global-start
+# Adopt existing AI coding agent session
+curl -X POST http://localhost:4000/api/agent/global-start
 
 # Trigger workflow run for a story
 curl -X POST http://localhost:4000/api/workflow-runs \

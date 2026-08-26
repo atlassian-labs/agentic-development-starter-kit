@@ -53,16 +53,16 @@ Each slice owns its route, service, frontend component, tests, and context.md. D
 | Layer | File(s) |
 |-------|---------|
 | Service | `src/backend/services/GlobalServeManager.js` |
-| Service | `src/backend/services/RovoAgentService.js` |
+| Service | `src/backend/services/AI agentAgentService.js` |
 | Context | `src/backend/services/slices/agent-orchestration/context.md` |
 
-**Owns:** The Rovo Dev session lifecycle  
+**Owns:** The an AI coding agent session lifecycle  
 **Exposes:** `GlobalServeManager.chat()`, `GlobalServeManager._chatDirectFresh()`, `GlobalServeManager.isReady()`  
 **Critical rules:**
 - Singleton — one instance per server process
 - Always try `adoptExistingInstance()` before starting new
 - Port 9050 preferred; never silently fall back to 9051
-- Token persisted to `logs/rovodev_token.json`
+- Token persisted to `logs/agent_session_token.json`
 
 ---
 
@@ -107,11 +107,11 @@ These are shared by all slices — never duplicate or replace them:
 | coder | `src/agents/coder/` | Writes code, raises PRs |
 | reviewer | `src/agents/reviewer/` | Reviews code quality and acceptance criteria |
 | planner | `src/agents/planner/` | Generates technical implementation plans |
-| pr-reviewer | `src/agents/pr-reviewer/` | Reviews open PRs in Bitbucket |
+| pr-reviewer | `src/agents/pr-reviewer/` | Reviews open pull requests in your Git hosting provider |
 | adr-agent | `src/agents/adr-agent/` | Writes Architecture Decision Records |
 | api-spec-agent | `src/agents/api-spec-agent/` | Generates OpenAPI specifications |
 | diagram-agent | `src/agents/diagram-agent/` | Generates architecture diagrams (Mermaid) |
-| confluence-writer | `src/agents/confluence-writer/` | Publishes documentation to Confluence |
+| docs-writer | `src/agents/docs-writer/` | Publishes documentation to your documentation platform |
 
 ---
 
@@ -146,7 +146,7 @@ Key tables (see `src/database/setup.js` for full schema):
 
 | Table | Owned by | Key fields |
 |-------|----------|-----------|
-| `stories` | story-management | `id`, `jira_key`, `title`, `status`, `workflow_key` |
+| `stories` | story-management | `id`, `work_item_key`, `title`, `status`, `workflow_key` |
 | `tasks` | story-management | `id`, `story_id`, `title`, `status`, `sequence_order` |
 | `workflow_runs` | workflow-engine | `id`, `story_id`, `workflow_key`, `status`, `current_stage_index` |
 | `workflow_artifacts` | workflow-engine | `id`, `run_id`, `stage_name`, `content`, `output_format` |

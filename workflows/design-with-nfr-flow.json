@@ -1,0 +1,72 @@
+{
+  "key": "design-with-nfr-flow",
+  "name": "Design + NFR Flow",
+  "description": "Full design workflow with NFR analysis, data model, API spec, diagrams, ADRs, and design doc. For architecture/design stories that produce documents, not code.",
+  "stages": [
+    {
+      "key": "nfr-analysis",
+      "name": "📊 NFR Analysis",
+      "agent": "diagram-agent",
+      "is_human_checkpoint": false,
+      "output_format": "markdown",
+      "prompt_mode": "replace",
+      "prompt": "## CONTEXT RESET\n\nYou are a senior architect analysing NFRs for {{component_name}} in {{project_name}}.\nYou are NOT working on any other project.\n\n## Task\nAnalyse Non-Functional Requirements for: {{story_title}}\n\n## Context\n{{story_description}}\n\n## Produce\n1. **Performance requirements** — latency targets (p50, p95, p99), throughput, concurrent users\n2. **Reliability requirements** — uptime SLA, error rate tolerance, recovery time objective\n3. **Security requirements** — auth model, data sensitivity, compliance constraints\n4. **Scalability requirements** — growth projections, scaling strategy\n5. **Observability requirements** — logging, metrics, alerting\n\nFor each NFR: state the requirement, the rationale, and how it constrains the design.\n\nOutput: markdown document. Begin with '# NFR Analysis: {{component_name}}'."
+    },
+    {
+      "key": "data-model",
+      "name": "🗄️ Data Model",
+      "agent": "data-model-agent",
+      "is_human_checkpoint": false,
+      "output_format": "markdown",
+      "prompt_mode": "replace",
+      "prompt": "## CONTEXT RESET\n\nYou are a senior data engineer designing the data model for {{component_name}} in {{project_name}}.\n\n## Context\nNFR Analysis:\n{{nfr_artifact}}\n\nStory: {{story_title}}\n{{story_description}}\n\n## Produce\n1. **Entity relationship diagram** (Mermaid erDiagram)\n2. **Table definitions** (SQL CREATE TABLE with all fields, types, indexes, constraints)\n3. **Key design decisions** (normalisation choices, indexing strategy, partitioning)\n4. **Migration strategy** (how existing data migrates if applicable)\n\nOutput: markdown with embedded Mermaid. Begin with '# Data Model: {{component_name}}'."
+    },
+    {
+      "key": "api-spec",
+      "name": "📡 API Spec",
+      "agent": "api-spec-agent",
+      "is_human_checkpoint": false,
+      "output_format": "markdown",
+      "prompt_mode": "replace",
+      "prompt": "## CONTEXT RESET\n\nYou are a senior API designer creating the API specification for {{component_name}} in {{project_name}}.\n\n## Context\nData Model:\n{{data_model_artifact}}\n\nNFR Analysis:\n{{nfr_artifact}}\n\n## Produce\nOpenAPI 3.0 specification covering:\n1. All endpoints (path, method, description)\n2. Request schemas (body, query params, path params)\n3. Response schemas (success and error cases)\n4. Authentication/authorisation model\n5. Rate limiting headers\n6. Error response format\n\nOutput: OpenAPI 3.0 YAML. Begin with 'openapi: 3.0.0'."
+    },
+    {
+      "key": "diagrams",
+      "name": "📐 Architecture Diagrams",
+      "agent": "diagram-agent",
+      "is_human_checkpoint": false,
+      "output_format": "markdown",
+      "prompt_mode": "replace",
+      "prompt": "## CONTEXT RESET\n\nYou are a senior architect creating architecture diagrams for {{component_name}} in {{project_name}}.\n\n## Context\nAPI Spec:\n{{api_spec_artifact}}\n\nData Model:\n{{data_model_artifact}}\n\n## Produce (all as Mermaid diagrams)\n1. **System context diagram** — how this component fits in the broader system\n2. **Component diagram** — internal structure and dependencies\n3. **Sequence diagrams** — for the 3 most important user flows\n4. **Deployment diagram** — where this runs and how it connects\n\nOutput: markdown with embedded Mermaid diagrams. Begin with '# Architecture Diagrams: {{component_name}}'."
+    },
+    {
+      "key": "adrs",
+      "name": "📋 ADRs",
+      "agent": "adr-agent",
+      "is_human_checkpoint": false,
+      "output_format": "markdown",
+      "prompt_mode": "replace",
+      "prompt": "## CONTEXT RESET\n\nYou are a senior architect writing Architecture Decision Records for {{component_name}} in {{project_name}}.\n\n## Context\nDesign documents produced so far:\n- NFR Analysis: {{nfr_artifact}}\n- Data Model: {{data_model_artifact}}\n- API Spec: {{api_spec_artifact}}\n- Diagrams: {{diagrams_artifact}}\n\n## Produce\nFor each key architectural decision in the design, write an ADR with:\n- Status: PROPOSED\n- Context: what problem this decision solves\n- Decision: what was decided\n- Consequences: positive and negative\n- Alternatives considered\n\nOutput: markdown with one ADR section per decision. Minimum 3 ADRs."
+    },
+    {
+      "key": "design-doc",
+      "name": "📄 Design Document",
+      "agent": "docs-writer",
+      "is_human_checkpoint": false,
+      "output_format": "markdown",
+      "prompt_mode": "replace",
+      "prompt": "## CONTEXT RESET\n\nYou are a technical writer creating a design document for {{component_name}} in {{project_name}}.\n\n## Context\nAll prior artifacts:\n- NFR Analysis: {{nfr_artifact}}\n- Data Model: {{data_model_artifact}}\n- API Spec: {{api_spec_artifact}}\n- Diagrams: {{diagrams_artifact}}\n- ADRs: {{adrs_artifact}}\n\n## Produce\nA comprehensive design document that synthesises all the above into a single readable document:\n1. Executive summary (3-5 sentences)\n2. Problem statement\n3. Proposed solution overview\n4. Architecture (with key diagrams embedded)\n5. Data model summary\n6. API summary\n7. NFR compliance statement\n8. Key decisions and trade-offs\n9. Open questions (items needing human input)\n10. Next steps\n\nOutput: markdown. Begin with '# Design: {{component_name}}'."
+    },
+    {
+      "key": "review",
+      "name": "👤 Human Review",
+      "agent": null,
+      "is_human_checkpoint": true,
+      "output_format": "text",
+      "prompt": "Please review the design document for {{component_name}}.\n\nThe full design document is shown above.\n\nCheck:\n1. Does the proposed architecture align with your vision?\n2. Are the NFRs appropriate for the expected scale?\n3. Are there any open questions that block implementation?\n4. Should any ADRs be changed before implementation begins?\n\nApprove to proceed to implementation, or add feedback to bounce back for revisions."
+    }
+  ],
+  "bounce_limit": 2,
+  "escalation_action": "notify_human",
+  "vibe_mode_compatible": false
+}

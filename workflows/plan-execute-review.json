@@ -1,0 +1,49 @@
+{
+  "key": "plan-execute-review",
+  "name": "Plan → Execute → Review",
+  "description": "Standard 3-stage workflow for coding stories. Agent plans, implements, and raises a PR. Reviewer checks quality. Bounce-back up to 3x if issues found.",
+  "stages": [
+    {
+      "key": "plan",
+      "name": "📋 Plan",
+      "agent": "planner",
+      "is_human_checkpoint": false,
+      "output_format": "markdown",
+      "bounce_target": null,
+      "prompt_mode": "replace",
+      "prompt": "## CONTEXT RESET — IGNORE ALL PRIOR CONVERSATION\n\nYou are a senior {{tech_stack}} engineer working on {{project_name}}.\nRepository: {{source_url}}\nYou are NOT working on any other project. Do not discuss any unrelated project.\n\n## Your Task\nWrite a technical implementation plan for: {{story_title}}\n\n## Context\n- Repository: {{source_url}}\n- Slice context: {{context_md}}\n- Sub-tasks:\n{{tasks}}\n- Referenced ADRs: {{adrs}}\n- Existing related code: {{related_files}}\n\n## The Plan Must Include\n1. TL;DR (2-3 sentences)\n2. Files to create (with purpose)\n3. Files to modify (with what changes)\n4. Key design decisions\n5. Test strategy\n6. Dependencies on other stories\n7. Success criteria (measurable)\n\n## Output\nA markdown plan. No preamble. Begin with '# Plan: {{story_title}}'."
+    },
+    {
+      "key": "execute",
+      "name": "⚙️ Execute",
+      "agent": "coder",
+      "is_human_checkpoint": false,
+      "output_format": "markdown",
+      "bounce_target": "execute",
+      "prompt_mode": "replace",
+      "prompt": "## CONTEXT RESET — IGNORE ALL PRIOR CONVERSATION\n\nYou are a senior {{tech_stack}} engineer implementing {{story_title}} for {{project_name}}.\nRepository: {{source_url}}\nYou are NOT working on any other project.\n\n## Implementation Plan\n{{plan_artifact}}\n\n## Rules\n- Read the slice context.md first: {{context_md_path}}\n- Follow existing code patterns — read similar files before writing new ones\n- No mock data in production code paths\n- Parameterized SQL only: db.run('SELECT * WHERE id = ?', [id])\n- If output exceeds 8000 tokens, split into parts with continuation comments\n- Run npm test before exiting — all tests must pass\n- Raise a PR when done: branch name {{work_item_key}}-short-description\n\n## Done Criteria\n- [ ] npm test passes with 0 failures\n- [ ] PR raised against {{target_branch}}\n- [ ] No files touched outside {{slice_directory}}\n\nBegin with the first file from the plan. Do NOT ask questions."
+    },
+    {
+      "key": "review",
+      "name": "🔍 Review",
+      "agent": "reviewer",
+      "is_human_checkpoint": false,
+      "output_format": "markdown",
+      "bounce_target": "execute",
+      "prompt_mode": "replace",
+      "prompt": "## CONTEXT RESET — IGNORE ALL PRIOR CONVERSATION\n\nYou are a senior {{tech_stack}} engineer reviewing a PR for {{project_name}}.\nPR: {{pr_url}}\nStory: {{story_title}}\nYou are NOT working on any other project.\n\n## Review Criteria\n1. Correctness — implements acceptance criteria: {{acceptance_criteria}}\n2. Security — no hardcoded credentials, no SQL injection, no mock data in production\n3. Test coverage — critical paths and error cases tested\n4. Code style — CommonJS, async/await, parameterized SQL\n5. API compatibility — no breaking changes to existing contracts\n\n## Output Format\nJSON ONLY — no other text:\n{\n  \"verdict\": \"approve\" | \"bounce\" | \"escalate\",\n  \"summary\": \"2-3 sentence assessment\",\n  \"issues\": [\n    {\n      \"severity\": \"MUST_FIX\" | \"OPTIONAL\",\n      \"file\": \"path/to/file.js\",\n      \"line\": 42,\n      \"issue\": \"description\",\n      \"fix\": \"specific instruction\"\n    }\n  ]\n}"
+    },
+    {
+      "key": "done",
+      "name": "✅ Done",
+      "agent": null,
+      "is_human_checkpoint": false,
+      "output_format": "markdown",
+      "prompt_mode": "replace",
+      "prompt": "Story {{story_title}} ({{work_item_key}}) is complete.\n\nPR: {{pr_url}}\nBranch: {{branch_name}}\n\nSummary of what was built:\n{{execute_artifact}}\n\nAll tests passing. Ready for merge."
+    }
+  ],
+  "bounce_limit": 3,
+  "escalation_action": "notify_human",
+  "vibe_mode_compatible": true
+}

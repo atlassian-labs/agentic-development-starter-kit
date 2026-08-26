@@ -1,6 +1,6 @@
 # For-External Share — Agentic-First Development Starter Kit
 
-Source: Agentic-First Development Starter Kit — Enterprise Tech People Tools
+Source: Agentic-First Development Starter Kit
 
 This directory is a shareable export of the starter-kit docs mentioned on that page.
 
@@ -28,3 +28,5 @@ This directory is a shareable export of the starter-kit docs mentioned on that p
 | `workflows/design-with-nfr-flow.json` | `templates/next-idea/workflows/design-with-nfr-flow.json` |
 | `src/agents/slice-context-template.md` | `templates/next-idea/src/agents/slice-context-template.md` |
 | `scripts/check-prerequisites.sh` | `templates/next-idea/scripts/check-prerequisites.sh` |
+
+| `OWNERS.md` | `OWNERS.md` |

@@ -1,6 +1,6 @@
 # Agent Operating Procedure — [YOUR PROJECT NAME]
 
-> **Read this before touching any code.** This is the operating procedure for all AI agents (Rovo Dev) working on this codebase. Follow it precisely to avoid regressions, duplicate work, and context pollution.
+> **Read this before touching any code.** This is the operating procedure for all AI agents (an AI coding agent) working on this codebase. Follow it precisely to avoid regressions, duplicate work, and context pollution.
 
 ---
 
@@ -47,7 +47,7 @@ npm run test:all        # Everything
 
 ### 5. Self-Correction Loop
 - If tests still fail after **5 attempts**: **stop and escalate**
-- Comment on the Jira issue with: what you tried, the error output, your best guess at root cause
+- Comment on the issue tracker item with: what you tried, the error output, your best guess at root cause
 
 ---
 
@@ -55,7 +55,7 @@ npm run test:all        # Everything
 
 ✅ All tests pass — `npm test` shows 0 failures  
 ✅ No changes outside your slice — run `git diff --name-only` to verify  
-✅ Comment on the Jira issue: what you built (1-2 sentences), key decisions, blockers hit  
+✅ Comment on the issue tracker item: what you built (1-2 sentences), key decisions, blockers hit  
 
 ---
 
@@ -63,11 +63,11 @@ npm run test:all        # Everything
 
 ### Missing Interface
 **Symptom:** You need a function from another slice that doesn't exist.  
-**Action:** Stop. Comment on Jira: `"Need interface: sliceName.functionName(args) → ReturnType"`. Wait.
+**Action:** Stop. Comment on issue tracker: `"Need interface: sliceName.functionName(args) → ReturnType"`. Wait.
 
 ### Ambiguous Domain Rule
 **Symptom:** You're unsure whether to validate in route vs service, or how to normalise a schema.  
-**Action:** Stop. Comment on Jira with your best guess and ask for confirmation. Don't assume.
+**Action:** Stop. Comment on issue tracker with your best guess and ask for confirmation. Don't assume.
 
 ### Tests Won't Pass After 5 Attempts
 **Symptom:** Still failing. You're not sure if it's your code or the test.  
@@ -99,7 +99,7 @@ This is the #1 agent failure mode. Before every background task (workflow stage,
 | Database | SQLite3 | Via `src/database/connection.js` only |
 | Bundler | Webpack 5 | Client-side code |
 | Testing | Jest | node env (backend), jsdom env (frontend) |
-| Agent Framework | Rovo Dev | Via GlobalServeManager |
+| Agent Framework | an AI coding agent | Via GlobalServeManager |
 
 ---
 
@@ -137,7 +137,7 @@ npm run data:reset     # Clear all data (dev only)
 - ✅ Parameterized SQL queries (`db.run('SELECT * WHERE id = ?', [id])`)
 - ✅ React functional components + hooks
 - ✅ Read context.md before writing any code
-- ✅ Log decisions and blockers on the Jira issue
+- ✅ Log decisions and blockers on the issue tracker item
 - ✅ Run all tests before declaring done
 
 ---
@@ -145,8 +145,8 @@ npm run data:reset     # Clear all data (dev only)
 ## Questions?
 
 1. Search `src/` for similar code — copy the pattern
-2. Read the Jira issue — it may contain context
+2. Read the issue tracker item — it may contain context
 3. Read the failing tests — they are executable documentation
 4. Read `docs/adr/` — past decisions explain why things are the way they are
 
-If still unclear: **comment on the Jira issue with what you've already tried.**
+If still unclear: **comment on the issue tracker item with what you've already tried.**

@@ -1,0 +1,31 @@
+name: Validate starter kit
+
+on:
+  pull_request:
+  workflow_dispatch:
+
+permissions:
+  contents: read
+
+jobs:
+  validate:
+    runs-on: ubuntu-latest
+    steps:
+      - name: Checkout
+        uses: actions/checkout@v4
+        with:
+          persist-credentials: false
+      - name: Check required files
+        shell: bash
+        run: |
+          test -f README.md
+          test -f LICENSE
+          test -f CONTRIBUTING.md
+          test -f CODE_OF_CONDUCT.md
+          test -f OWNERS.md
+          test -f MANIFEST.md
+          test -f EXTERNAL_SHARE_CHECKLIST.md
+      - name: Check for private/internal references
+        shell: bash
+        run: |
+          ! grep -RInE 'internal\.example\.com|private\.example\.com|source-project-name|private-company-name' . --exclude='validate.yml'

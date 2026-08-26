@@ -6,7 +6,7 @@
 
 ## What Is an Agent-First Project?
 
-Instead of engineers writing all the code manually, AI agents (Rovo Dev) write significant portions of it. You define **what** needs to be built. The agent figures out **how**.
+Instead of engineers writing all the code manually, AI agents (an AI coding agent) write significant portions of it. You define **what** needs to be built. The agent figures out **how**.
 
 Your job changes in two important ways:
 1. **Before:** You write requirements. Now you write requirements **as tests** — the agent uses failing tests as its definition of done.
@@ -76,7 +76,7 @@ Signs a story is stale:
 
 | Term | What it means to you |
 |------|---------------------|
-| **Agent** | An AI (Rovo Dev) that writes code, creates documents, or does research on your behalf |
+| **Agent** | An AI (an AI coding agent) that writes code, creates documents, or does research on your behalf |
 | **Workflow** | A sequence of stages that an agent works through to complete a story. Like a recipe. |
 | **Stage** | One step in the workflow. E.g. "Plan → Execute → Review" is 3 stages. |
 | **Human Checkpoint** | A pause in the workflow where YOU review what the agent produced and decide whether to approve or send back |
@@ -116,7 +116,7 @@ Signs a story is stale:
 → This is a valid concern. Ask the tech lead to explain the artifact. If it can't be explained in plain English, it's probably wrong.
 
 ### "The agent hasn't moved in hours"
-→ The workflow ticker may have stalled. Tell the tech lead — they can check if the Rovo Dev session needs to be re-adopted.
+→ The workflow ticker may have stalled. Tell the tech lead — they can check if the an AI coding agent session needs to be re-adopted.
 
 ---
 
