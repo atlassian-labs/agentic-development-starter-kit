@@ -1,0 +1,24 @@
+{
+  "task_id": "PUB-SKLEARN-OUTPUT",
+  "scope": "public",
+  "source": "SWE-bench Verified",
+  "source_id": "scikit-learn__scikit-learn-25747",
+  "repository": "scikit-learn/scikit-learn",
+  "base_commit": "2c867b8f822eb7a684f0d5c4359e4426e1c9cfe0",
+  "difficulty": "15 min - 1 hour",
+  "task_type": "api-contract-bug",
+  "problem": "FeatureUnion fails when pandas transform output is combined with an aggregating custom transformer.",
+  "fail_to_pass": [
+    "sklearn/utils/tests/test_set_output.py::test_set_output_pandas_keep_index"
+  ],
+  "pass_to_pass_count": 14,
+  "gold_patch_lines": 21,
+  "gold_test_patch_lines": 48,
+  "architecture_rule_seed": [
+    "set_output preserves container and index contracts",
+    "FeatureUnion components may change row cardinality without corrupting output wrapping"
+  ],
+  "release_status": "PUBLIC",
+  "upstream_commit_url": "https://github.com/scikit-learn/scikit-learn/commit/2c867b8f822eb7a684f0d5c4359e4426e1c9cfe0",
+  "swebench_dataset_url": "https://huggingface.co/datasets/princeton-nlp/SWE-bench_Verified"
+}

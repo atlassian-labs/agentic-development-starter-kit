@@ -1,0 +1,24 @@
+{
+  "task_id": "PUB-SPHINX-NAPOLEON",
+  "scope": "public",
+  "source": "SWE-bench Verified",
+  "source_id": "sphinx-doc__sphinx-9673",
+  "repository": "sphinx-doc/sphinx",
+  "base_commit": "5fb51fb1467dc5eea7505402c3c5d9b378d3b441",
+  "difficulty": "15 min - 1 hour",
+  "task_type": "extension-interaction-bug",
+  "problem": "autodoc_typehints_description_target does not work with the Napoleon extension.",
+  "fail_to_pass": [
+    "tests/test_ext_autodoc_configs.py::test_autodoc_typehints_description_no_undoc"
+  ],
+  "pass_to_pass_count": 24,
+  "gold_patch_lines": 20,
+  "gold_test_patch_lines": 29,
+  "architecture_rule_seed": [
+    "extensions communicate through documented metadata contracts",
+    "undocumented members do not gain return-type text when target is documented"
+  ],
+  "release_status": "PUBLIC",
+  "upstream_commit_url": "https://github.com/sphinx-doc/sphinx/commit/5fb51fb1467dc5eea7505402c3c5d9b378d3b441",
+  "swebench_dataset_url": "https://huggingface.co/datasets/princeton-nlp/SWE-bench_Verified"
+}

@@ -1,0 +1,24 @@
+{
+  "task_id": "PUB-XARRAY-TIMEDELTA",
+  "scope": "public",
+  "source": "SWE-bench Verified",
+  "source_id": "pydata__xarray-6599",
+  "repository": "pydata/xarray",
+  "base_commit": "6bb2b855498b5c68d7cca8cceb710365d58e6048",
+  "difficulty": "15 min - 1 hour",
+  "task_type": "numeric-semantics-bug",
+  "problem": "polyval returns incorrect results for timedelta64 coordinates.",
+  "fail_to_pass": [
+    "xarray/tests/test_computation.py::test_polyval[timedelta-False]"
+  ],
+  "pass_to_pass_count": 264,
+  "gold_patch_lines": 23,
+  "gold_test_patch_lines": 18,
+  "architecture_rule_seed": [
+    "datetime and timedelta conversion preserves units",
+    "numeric polynomial evaluation does not silently change coordinate meaning"
+  ],
+  "release_status": "PUBLIC",
+  "upstream_commit_url": "https://github.com/pydata/xarray/commit/6bb2b855498b5c68d7cca8cceb710365d58e6048",
+  "swebench_dataset_url": "https://huggingface.co/datasets/princeton-nlp/SWE-bench_Verified"
+}

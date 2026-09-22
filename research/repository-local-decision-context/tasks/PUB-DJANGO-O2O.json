@@ -1,0 +1,24 @@
+{
+  "task_id": "PUB-DJANGO-O2O",
+  "scope": "public",
+  "source": "SWE-bench Verified",
+  "source_id": "django__django-15278",
+  "repository": "django/django",
+  "base_commit": "0ab58c120939093fea90822f376e1866fc714d1f",
+  "difficulty": "15 min - 1 hour",
+  "task_type": "schema-bug",
+  "problem": "Adding a nullable OneToOneField crashes on SQLite.",
+  "fail_to_pass": [
+    "test_add_field_o2o_nullable (schema.tests.SchemaTests)"
+  ],
+  "pass_to_pass_count": 138,
+  "gold_patch_lines": 23,
+  "gold_test_patch_lines": 22,
+  "architecture_rule_seed": [
+    "backend-specific schema changes preserve field semantics",
+    "nullable unique relations must remain valid on SQLite"
+  ],
+  "release_status": "PUBLIC",
+  "upstream_commit_url": "https://github.com/django/django/commit/0ab58c120939093fea90822f376e1866fc714d1f",
+  "swebench_dataset_url": "https://huggingface.co/datasets/princeton-nlp/SWE-bench_Verified"
+}

@@ -1,0 +1,136 @@
+{
+  "generated_utc": "2026-09-07T02:09:11.026540+00:00",
+  "analysis_label": "exploratory descriptive pilot after user-directed early termination",
+  "confirmatory_claim_permitted": false,
+  "reason_no_confirmatory_claim": "The preregistered 96-run design was stopped at 32 outcomes after interim results were visible; the randomized prefix is unbalanced by task and condition.",
+  "data_scope": {
+    "corrected_v2_runs": 32,
+    "public_run_records_released": 18,
+    "private_run_records_withheld": 14,
+    "infrastructure_failures": 0,
+    "quarantined_v1_included": 0
+  },
+  "overall": {
+    "runs": 32,
+    "passes": 18,
+    "pass_rate": 0.5625,
+    "pass_rate_wilson_95": [
+      0.3932559113685198,
+      0.7183466888495963
+    ],
+    "violation_totals": {
+      "behavior_violations": 18,
+      "architecture_violations": 12,
+      "security_privacy_violations": 0,
+      "scope_violations": 9
+    },
+    "runs_with_any_secondary_violation": 20,
+    "wall_clock_seconds": {
+      "mean": 201.74525,
+      "median": 64.4635,
+      "minimum": 33.63,
+      "maximum": 1412.865,
+      "total": 6455.848000000002
+    }
+  },
+  "by_condition": {
+    "search-only": {
+      "runs": 5,
+      "passes": 2,
+      "pass_rate": 0.4,
+      "pass_rate_wilson_95": [
+        0.11762077423264783,
+        0.769275718723987
+      ],
+      "violation_totals": {
+        "behavior_violations": 3,
+        "architecture_violations": 1,
+        "security_privacy_violations": 0,
+        "scope_violations": 3
+      },
+      "runs_with_any_secondary_violation": 5,
+      "wall_clock_seconds": {
+        "mean": 241.10160000000002,
+        "median": 63.407,
+        "minimum": 55.035,
+        "maximum": 944.389,
+        "total": 1205.508
+      }
+    },
+    "global-docs": {
+      "runs": 11,
+      "passes": 6,
+      "pass_rate": 0.5454545454545454,
+      "pass_rate_wilson_95": [
+        0.280091537409322,
+        0.7872872837754024
+      ],
+      "violation_totals": {
+        "behavior_violations": 9,
+        "architecture_violations": 6,
+        "security_privacy_violations": 0,
+        "scope_violations": 1
+      },
+      "runs_with_any_secondary_violation": 6,
+      "wall_clock_seconds": {
+        "mean": 236.3643636363636,
+        "median": 56.993,
+        "minimum": 40.159,
+        "maximum": 976.4,
+        "total": 2600.0080000000003
+      }
+    },
+    "local-context": {
+      "runs": 11,
+      "passes": 7,
+      "pass_rate": 0.6363636363636364,
+      "pass_rate_wilson_95": [
+        0.35380117450784887,
+        0.8483352890463243
+      ],
+      "violation_totals": {
+        "behavior_violations": 4,
+        "architecture_violations": 4,
+        "security_privacy_violations": 0,
+        "scope_violations": 3
+      },
+      "runs_with_any_secondary_violation": 7,
+      "wall_clock_seconds": {
+        "mean": 85.23936363636363,
+        "median": 60.887,
+        "minimum": 33.63,
+        "maximum": 338.358,
+        "total": 937.6329999999998
+      }
+    },
+    "full-workflow": {
+      "runs": 5,
+      "passes": 3,
+      "pass_rate": 0.6,
+      "pass_rate_wilson_95": [
+        0.2307242812760128,
+        0.882379225767352
+      ],
+      "violation_totals": {
+        "behavior_violations": 2,
+        "architecture_violations": 1,
+        "security_privacy_violations": 0,
+        "scope_violations": 2
+      },
+      "runs_with_any_secondary_violation": 2,
+      "wall_clock_seconds": {
+        "mean": 342.5398,
+        "median": 75.12,
+        "minimum": 65.52,
+        "maximum": 1412.865,
+        "total": 1712.699
+      }
+    }
+  },
+  "raw_risk_difference_vs_search_only": {
+    "global-docs": 0.1454545454545454,
+    "local-context": 0.23636363636363633,
+    "full-workflow": 0.19999999999999996
+  },
+  "interpretation_rule": "Wilson intervals describe binomial uncertainty within the observed, compositionally unequal cells. They are not adjusted treatment-effect intervals. Raw risk differences are descriptive and confounded by task composition. No p-values or confirmatory mixed-effects estimates are reported."
+}

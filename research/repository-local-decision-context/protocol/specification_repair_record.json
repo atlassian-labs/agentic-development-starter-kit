@@ -1,0 +1,9 @@
+{
+  "repaired_utc": "2026-09-06T23:49:33.173053+00:00",
+  "reason": "Externally observable task requirements were underspecified and primary functional success was conflated with secondary architecture/security rules.",
+  "old_plan_sha256": "3daa06c59cc89a2129e4531ba8227760461f07a8a3bf149cfe79b4933aa2ed2f",
+  "new_plan_sha256": "acf630e6fcf39be40920d965e3522ace289667ec8ddad4df67da01efa6e3a0a0",
+  "new_spec_version": "2026-09-06.2",
+  "preserved_randomization_order": true,
+  "old_outcomes_excluded": true
+}

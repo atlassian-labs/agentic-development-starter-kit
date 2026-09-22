@@ -1,0 +1,98 @@
+[
+  {
+    "task_id": "PUB-DJANGO-O2O",
+    "scope": "public",
+    "source": "SWE-bench Verified",
+    "source_id": "django__django-15278",
+    "repository": "django/django",
+    "base_commit": "0ab58c120939093fea90822f376e1866fc714d1f",
+    "difficulty": "15 min - 1 hour",
+    "task_type": "schema-bug",
+    "problem": "Adding a nullable OneToOneField crashes on SQLite.",
+    "fail_to_pass": [
+      "test_add_field_o2o_nullable (schema.tests.SchemaTests)"
+    ],
+    "pass_to_pass_count": 138,
+    "gold_patch_lines": 23,
+    "gold_test_patch_lines": 22,
+    "architecture_rule_seed": [
+      "backend-specific schema changes preserve field semantics",
+      "nullable unique relations must remain valid on SQLite"
+    ],
+    "release_status": "PUBLIC",
+    "upstream_commit_url": "https://github.com/django/django/commit/0ab58c120939093fea90822f376e1866fc714d1f",
+    "swebench_dataset_url": "https://huggingface.co/datasets/princeton-nlp/SWE-bench_Verified"
+  },
+  {
+    "task_id": "PUB-SKLEARN-OUTPUT",
+    "scope": "public",
+    "source": "SWE-bench Verified",
+    "source_id": "scikit-learn__scikit-learn-25747",
+    "repository": "scikit-learn/scikit-learn",
+    "base_commit": "2c867b8f822eb7a684f0d5c4359e4426e1c9cfe0",
+    "difficulty": "15 min - 1 hour",
+    "task_type": "api-contract-bug",
+    "problem": "FeatureUnion fails when pandas transform output is combined with an aggregating custom transformer.",
+    "fail_to_pass": [
+      "sklearn/utils/tests/test_set_output.py::test_set_output_pandas_keep_index"
+    ],
+    "pass_to_pass_count": 14,
+    "gold_patch_lines": 21,
+    "gold_test_patch_lines": 48,
+    "architecture_rule_seed": [
+      "set_output preserves container and index contracts",
+      "FeatureUnion components may change row cardinality without corrupting output wrapping"
+    ],
+    "release_status": "PUBLIC",
+    "upstream_commit_url": "https://github.com/scikit-learn/scikit-learn/commit/2c867b8f822eb7a684f0d5c4359e4426e1c9cfe0",
+    "swebench_dataset_url": "https://huggingface.co/datasets/princeton-nlp/SWE-bench_Verified"
+  },
+  {
+    "task_id": "PUB-SPHINX-NAPOLEON",
+    "scope": "public",
+    "source": "SWE-bench Verified",
+    "source_id": "sphinx-doc__sphinx-9673",
+    "repository": "sphinx-doc/sphinx",
+    "base_commit": "5fb51fb1467dc5eea7505402c3c5d9b378d3b441",
+    "difficulty": "15 min - 1 hour",
+    "task_type": "extension-interaction-bug",
+    "problem": "autodoc_typehints_description_target does not work with the Napoleon extension.",
+    "fail_to_pass": [
+      "tests/test_ext_autodoc_configs.py::test_autodoc_typehints_description_no_undoc"
+    ],
+    "pass_to_pass_count": 24,
+    "gold_patch_lines": 20,
+    "gold_test_patch_lines": 29,
+    "architecture_rule_seed": [
+      "extensions communicate through documented metadata contracts",
+      "undocumented members do not gain return-type text when target is documented"
+    ],
+    "release_status": "PUBLIC",
+    "upstream_commit_url": "https://github.com/sphinx-doc/sphinx/commit/5fb51fb1467dc5eea7505402c3c5d9b378d3b441",
+    "swebench_dataset_url": "https://huggingface.co/datasets/princeton-nlp/SWE-bench_Verified"
+  },
+  {
+    "task_id": "PUB-XARRAY-TIMEDELTA",
+    "scope": "public",
+    "source": "SWE-bench Verified",
+    "source_id": "pydata__xarray-6599",
+    "repository": "pydata/xarray",
+    "base_commit": "6bb2b855498b5c68d7cca8cceb710365d58e6048",
+    "difficulty": "15 min - 1 hour",
+    "task_type": "numeric-semantics-bug",
+    "problem": "polyval returns incorrect results for timedelta64 coordinates.",
+    "fail_to_pass": [
+      "xarray/tests/test_computation.py::test_polyval[timedelta-False]"
+    ],
+    "pass_to_pass_count": 264,
+    "gold_patch_lines": 23,
+    "gold_test_patch_lines": 18,
+    "architecture_rule_seed": [
+      "datetime and timedelta conversion preserves units",
+      "numeric polynomial evaluation does not silently change coordinate meaning"
+    ],
+    "release_status": "PUBLIC",
+    "upstream_commit_url": "https://github.com/pydata/xarray/commit/6bb2b855498b5c68d7cca8cceb710365d58e6048",
+    "swebench_dataset_url": "https://huggingface.co/datasets/princeton-nlp/SWE-bench_Verified"
+  }
+]

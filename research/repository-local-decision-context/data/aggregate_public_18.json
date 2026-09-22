@@ -1,0 +1,175 @@
+{
+  "by_condition": {
+    "full-workflow": {
+      "pass_rate": 0.5,
+      "pass_rate_wilson_95": [
+        0.09453120573423074,
+        0.9054687942657693
+      ],
+      "passes": 1,
+      "runs": 2,
+      "violation_totals": {
+        "architecture_violations": 0,
+        "behavior_violations": 1,
+        "scope_violations": 1,
+        "security_privacy_violations": 0
+      },
+      "wall_clock_seconds": {
+        "mean": 83.452,
+        "median": 83.452
+      }
+    },
+    "global-docs": {
+      "pass_rate": 0.6,
+      "pass_rate_wilson_95": [
+        0.2307242812760128,
+        0.882379225767352
+      ],
+      "passes": 3,
+      "runs": 5,
+      "violation_totals": {
+        "architecture_violations": 0,
+        "behavior_violations": 2,
+        "scope_violations": 1,
+        "security_privacy_violations": 0
+      },
+      "wall_clock_seconds": {
+        "mean": 61.26840000000001,
+        "median": 56.993
+      }
+    },
+    "local-context": {
+      "pass_rate": 0.7142857142857143,
+      "pass_rate_wilson_95": [
+        0.35893445183261935,
+        0.9177810759959433
+      ],
+      "passes": 5,
+      "runs": 7,
+      "violation_totals": {
+        "architecture_violations": 0,
+        "behavior_violations": 2,
+        "scope_violations": 2,
+        "security_privacy_violations": 0
+      },
+      "wall_clock_seconds": {
+        "mean": 67.71728571428571,
+        "median": 66.473
+      }
+    },
+    "search-only": {
+      "pass_rate": 0.25,
+      "pass_rate_wilson_95": [
+        0.04558726080970055,
+        0.6993581574175981
+      ],
+      "passes": 1,
+      "runs": 4,
+      "violation_totals": {
+        "architecture_violations": 0,
+        "behavior_violations": 3,
+        "scope_violations": 2,
+        "security_privacy_violations": 0
+      },
+      "wall_clock_seconds": {
+        "mean": 65.27975,
+        "median": 62.075
+      }
+    }
+  },
+  "confirmatory_claim_permitted": false,
+  "overall": {
+    "pass_rate": 0.5555555555555556,
+    "pass_rate_wilson_95": [
+      0.33716415642042774,
+      0.7544048187299437
+    ],
+    "passes": 10,
+    "runs": 18,
+    "violation_totals": {
+      "architecture_violations": 0,
+      "behavior_violations": 8,
+      "scope_violations": 6,
+      "security_privacy_violations": 0
+    },
+    "wall_clock_seconds": {
+      "mean": 67.13255555555556,
+      "median": 62.8
+    }
+  },
+  "release_scope": "18 public corrected-v2 outcomes",
+  "task_condition_matrix": {
+    "PUB-DJANGO-O2O": {
+      "full-workflow": {
+        "passes": 0,
+        "runs": 0
+      },
+      "global-docs": {
+        "passes": 1,
+        "runs": 1
+      },
+      "local-context": {
+        "passes": 2,
+        "runs": 2
+      },
+      "search-only": {
+        "passes": 1,
+        "runs": 1
+      }
+    },
+    "PUB-SKLEARN-OUTPUT": {
+      "full-workflow": {
+        "passes": 0,
+        "runs": 1
+      },
+      "global-docs": {
+        "passes": 0,
+        "runs": 1
+      },
+      "local-context": {
+        "passes": 0,
+        "runs": 2
+      },
+      "search-only": {
+        "passes": 0,
+        "runs": 1
+      }
+    },
+    "PUB-SPHINX-NAPOLEON": {
+      "full-workflow": {
+        "passes": 0,
+        "runs": 0
+      },
+      "global-docs": {
+        "passes": 0,
+        "runs": 0
+      },
+      "local-context": {
+        "passes": 2,
+        "runs": 2
+      },
+      "search-only": {
+        "passes": 0,
+        "runs": 0
+      }
+    },
+    "PUB-XARRAY-TIMEDELTA": {
+      "full-workflow": {
+        "passes": 1,
+        "runs": 1
+      },
+      "global-docs": {
+        "passes": 2,
+        "runs": 3
+      },
+      "local-context": {
+        "passes": 1,
+        "runs": 1
+      },
+      "search-only": {
+        "passes": 0,
+        "runs": 2
+      }
+    }
+  }
+}

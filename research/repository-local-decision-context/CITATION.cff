@@ -1,0 +1,23 @@
+cff-version: 1.2.0
+message: >-
+  If you use these study artifacts, please cite the archived dataset using the
+  Zenodo DOI below.
+title: "Repository-Local Decision Context for Software Agents: Public Study Artifacts"
+type: dataset
+version: 1.0.0
+doi: 10.5281/zenodo.22885563
+url: "https://doi.org/10.5281/zenodo.22885563"
+repository-code: "https://github.com/atlassian-labs/agentic-development-starter-kit"
+authors:
+  - family-names: Bableshwar
+    given-names: Prasanna
+    affiliation: Atlassian Corporation
+    orcid: "https://orcid.org/0009-0004-6477-8046"
+keywords:
+  - autonomous software agents
+  - coding agents
+  - decision context
+  - multi-agent systems
+  - agent evaluation
+  - software engineering
+license: MIT
