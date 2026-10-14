@@ -253,11 +253,6 @@ npm run diagnose:local
 
 See [ADR-011](docs/adr/ADR-011-opentelemetry-workflow-tracing.md) for the span and privacy contract.
 
-Two CNCF article drafts use the example:
-
-- [Tests Passed. The Trace Still Found an N+1 Query.](docs/cncf/ARTICLE-01-OTEL-PERFORMANCE-DEBUGGING.md)
-- [Tracing Plan, Execute, and Review Agent Workflows with OpenTelemetry](docs/cncf/ARTICLE-02-OTEL-WORKFLOW-TRACING.md)
-
 ---
 
 ## Quick Reference
