@@ -1,0 +1,394 @@
+[
+  {
+    "task_id": "PUB-DJANGO-O2O",
+    "mode": "base",
+    "hidden_test_success": false,
+    "primary_rule_ids": [
+      "PUB-DJANGO-O2O-HIDDEN"
+    ],
+    "rules": [
+      {
+        "rule_id": "PUB-DJANGO-O2O-HIDDEN",
+        "group": "behavior",
+        "status": "FAIL",
+        "severity": "critical",
+        "command": "python3 tests/runtests.py schema.tests.SchemaTests.test_add_field_o2o_nullable schema.tests.SchemaTests.test_add_field_default_nullable schema.tests.SchemaTests.test_alter_field_fk_to_o2o schema.tests.SchemaTests.test_alter_field_o2o_to_fk",
+        "exit_code": 1
+      },
+      {
+        "rule_id": "PUB-DJANGO-O2O-SCOPE",
+        "group": "scope",
+        "status": "PASS",
+        "severity": "error",
+        "command": "",
+        "exit_code": null
+      }
+    ],
+    "violations_by_group": {
+      "behavior": 1
+    },
+    "changed_files": [
+      "tests/schema/tests.py"
+    ],
+    "manifest_sha256": "0b5092f3d60acc206b7de32d3a3fa032dcd59f8c704f47e7517358035c81908f"
+  },
+  {
+    "task_id": "PUB-DJANGO-O2O",
+    "mode": "fault",
+    "hidden_test_success": false,
+    "primary_rule_ids": [
+      "PUB-DJANGO-O2O-HIDDEN"
+    ],
+    "rules": [
+      {
+        "rule_id": "PUB-DJANGO-O2O-HIDDEN",
+        "group": "behavior",
+        "status": "FAIL",
+        "severity": "critical",
+        "command": "python3 tests/runtests.py schema.tests.SchemaTests.test_add_field_o2o_nullable schema.tests.SchemaTests.test_add_field_default_nullable schema.tests.SchemaTests.test_alter_field_fk_to_o2o schema.tests.SchemaTests.test_alter_field_o2o_to_fk",
+        "exit_code": 1
+      },
+      {
+        "rule_id": "PUB-DJANGO-O2O-SCOPE",
+        "group": "scope",
+        "status": "PASS",
+        "severity": "error",
+        "command": "",
+        "exit_code": null
+      }
+    ],
+    "violations_by_group": {
+      "behavior": 1
+    },
+    "changed_files": [
+      "tests/schema/tests.py"
+    ],
+    "manifest_sha256": "0b5092f3d60acc206b7de32d3a3fa032dcd59f8c704f47e7517358035c81908f"
+  },
+  {
+    "task_id": "PUB-DJANGO-O2O",
+    "mode": "reference",
+    "hidden_test_success": true,
+    "primary_rule_ids": [
+      "PUB-DJANGO-O2O-HIDDEN"
+    ],
+    "rules": [
+      {
+        "rule_id": "PUB-DJANGO-O2O-HIDDEN",
+        "group": "behavior",
+        "status": "PASS",
+        "severity": "critical",
+        "command": "python3 tests/runtests.py schema.tests.SchemaTests.test_add_field_o2o_nullable schema.tests.SchemaTests.test_add_field_default_nullable schema.tests.SchemaTests.test_alter_field_fk_to_o2o schema.tests.SchemaTests.test_alter_field_o2o_to_fk",
+        "exit_code": 0
+      },
+      {
+        "rule_id": "PUB-DJANGO-O2O-SCOPE",
+        "group": "scope",
+        "status": "PASS",
+        "severity": "error",
+        "command": "",
+        "exit_code": null
+      }
+    ],
+    "violations_by_group": {},
+    "changed_files": [
+      "django/db/backends/sqlite3/schema.py",
+      "tests/schema/tests.py"
+    ],
+    "manifest_sha256": "0b5092f3d60acc206b7de32d3a3fa032dcd59f8c704f47e7517358035c81908f"
+  },
+  {
+    "task_id": "PUB-SKLEARN-OUTPUT",
+    "mode": "base",
+    "hidden_test_success": false,
+    "primary_rule_ids": [
+      "PUB-SKLEARN-OUTPUT-HIDDEN"
+    ],
+    "rules": [
+      {
+        "rule_id": "PUB-SKLEARN-OUTPUT-HIDDEN",
+        "group": "behavior",
+        "status": "FAIL",
+        "severity": "critical",
+        "command": "python -m pytest -q sklearn/utils/tests/test_set_output.py::test_set_output_pandas_keep_index",
+        "exit_code": 1
+      },
+      {
+        "rule_id": "PUB-SKLEARN-OUTPUT-SCOPE",
+        "group": "scope",
+        "status": "PASS",
+        "severity": "error",
+        "command": "",
+        "exit_code": null
+      }
+    ],
+    "violations_by_group": {
+      "behavior": 1
+    },
+    "changed_files": [
+      "sklearn/utils/tests/test_set_output.py"
+    ],
+    "manifest_sha256": "0b5092f3d60acc206b7de32d3a3fa032dcd59f8c704f47e7517358035c81908f"
+  },
+  {
+    "task_id": "PUB-SKLEARN-OUTPUT",
+    "mode": "fault",
+    "hidden_test_success": false,
+    "primary_rule_ids": [
+      "PUB-SKLEARN-OUTPUT-HIDDEN"
+    ],
+    "rules": [
+      {
+        "rule_id": "PUB-SKLEARN-OUTPUT-HIDDEN",
+        "group": "behavior",
+        "status": "FAIL",
+        "severity": "critical",
+        "command": "python -m pytest -q sklearn/utils/tests/test_set_output.py::test_set_output_pandas_keep_index",
+        "exit_code": 1
+      },
+      {
+        "rule_id": "PUB-SKLEARN-OUTPUT-SCOPE",
+        "group": "scope",
+        "status": "PASS",
+        "severity": "error",
+        "command": "",
+        "exit_code": null
+      }
+    ],
+    "violations_by_group": {
+      "behavior": 1
+    },
+    "changed_files": [
+      "sklearn/utils/tests/test_set_output.py"
+    ],
+    "manifest_sha256": "0b5092f3d60acc206b7de32d3a3fa032dcd59f8c704f47e7517358035c81908f"
+  },
+  {
+    "task_id": "PUB-SKLEARN-OUTPUT",
+    "mode": "reference",
+    "hidden_test_success": true,
+    "primary_rule_ids": [
+      "PUB-SKLEARN-OUTPUT-HIDDEN"
+    ],
+    "rules": [
+      {
+        "rule_id": "PUB-SKLEARN-OUTPUT-HIDDEN",
+        "group": "behavior",
+        "status": "PASS",
+        "severity": "critical",
+        "command": "python -m pytest -q sklearn/utils/tests/test_set_output.py::test_set_output_pandas_keep_index",
+        "exit_code": 0
+      },
+      {
+        "rule_id": "PUB-SKLEARN-OUTPUT-SCOPE",
+        "group": "scope",
+        "status": "PASS",
+        "severity": "error",
+        "command": "",
+        "exit_code": null
+      }
+    ],
+    "violations_by_group": {},
+    "changed_files": [
+      "sklearn/utils/_set_output.py",
+      "sklearn/utils/tests/test_set_output.py"
+    ],
+    "manifest_sha256": "0b5092f3d60acc206b7de32d3a3fa032dcd59f8c704f47e7517358035c81908f"
+  },
+  {
+    "task_id": "PUB-SPHINX-NAPOLEON",
+    "mode": "base",
+    "hidden_test_success": false,
+    "primary_rule_ids": [
+      "PUB-SPHINX-NAPOLEON-HIDDEN"
+    ],
+    "rules": [
+      {
+        "rule_id": "PUB-SPHINX-NAPOLEON-HIDDEN",
+        "group": "behavior",
+        "status": "FAIL",
+        "severity": "critical",
+        "command": "python -m pytest -q tests/test_ext_autodoc_configs.py::test_autodoc_typehints_description_no_undoc",
+        "exit_code": 1
+      },
+      {
+        "rule_id": "PUB-SPHINX-NAPOLEON-SCOPE",
+        "group": "scope",
+        "status": "PASS",
+        "severity": "error",
+        "command": "",
+        "exit_code": null
+      }
+    ],
+    "violations_by_group": {
+      "behavior": 1
+    },
+    "changed_files": [
+      "tests/test_ext_autodoc_configs.py"
+    ],
+    "manifest_sha256": "0b5092f3d60acc206b7de32d3a3fa032dcd59f8c704f47e7517358035c81908f"
+  },
+  {
+    "task_id": "PUB-SPHINX-NAPOLEON",
+    "mode": "fault",
+    "hidden_test_success": false,
+    "primary_rule_ids": [
+      "PUB-SPHINX-NAPOLEON-HIDDEN"
+    ],
+    "rules": [
+      {
+        "rule_id": "PUB-SPHINX-NAPOLEON-HIDDEN",
+        "group": "behavior",
+        "status": "FAIL",
+        "severity": "critical",
+        "command": "python -m pytest -q tests/test_ext_autodoc_configs.py::test_autodoc_typehints_description_no_undoc",
+        "exit_code": 1
+      },
+      {
+        "rule_id": "PUB-SPHINX-NAPOLEON-SCOPE",
+        "group": "scope",
+        "status": "PASS",
+        "severity": "error",
+        "command": "",
+        "exit_code": null
+      }
+    ],
+    "violations_by_group": {
+      "behavior": 1
+    },
+    "changed_files": [
+      "tests/test_ext_autodoc_configs.py"
+    ],
+    "manifest_sha256": "0b5092f3d60acc206b7de32d3a3fa032dcd59f8c704f47e7517358035c81908f"
+  },
+  {
+    "task_id": "PUB-SPHINX-NAPOLEON",
+    "mode": "reference",
+    "hidden_test_success": true,
+    "primary_rule_ids": [
+      "PUB-SPHINX-NAPOLEON-HIDDEN"
+    ],
+    "rules": [
+      {
+        "rule_id": "PUB-SPHINX-NAPOLEON-HIDDEN",
+        "group": "behavior",
+        "status": "PASS",
+        "severity": "critical",
+        "command": "python -m pytest -q tests/test_ext_autodoc_configs.py::test_autodoc_typehints_description_no_undoc",
+        "exit_code": 0
+      },
+      {
+        "rule_id": "PUB-SPHINX-NAPOLEON-SCOPE",
+        "group": "scope",
+        "status": "PASS",
+        "severity": "error",
+        "command": "",
+        "exit_code": null
+      }
+    ],
+    "violations_by_group": {},
+    "changed_files": [
+      "sphinx/ext/autodoc/typehints.py",
+      "tests/test_ext_autodoc_configs.py"
+    ],
+    "manifest_sha256": "0b5092f3d60acc206b7de32d3a3fa032dcd59f8c704f47e7517358035c81908f"
+  },
+  {
+    "task_id": "PUB-XARRAY-TIMEDELTA",
+    "mode": "base",
+    "hidden_test_success": false,
+    "primary_rule_ids": [
+      "PUB-XARRAY-TIMEDELTA-HIDDEN"
+    ],
+    "rules": [
+      {
+        "rule_id": "PUB-XARRAY-TIMEDELTA-HIDDEN",
+        "group": "behavior",
+        "status": "FAIL",
+        "severity": "critical",
+        "command": "python -m pytest -q xarray/tests/test_computation.py::test_polyval[timedelta-False]",
+        "exit_code": 1
+      },
+      {
+        "rule_id": "PUB-XARRAY-TIMEDELTA-SCOPE",
+        "group": "scope",
+        "status": "PASS",
+        "severity": "error",
+        "command": "",
+        "exit_code": null
+      }
+    ],
+    "violations_by_group": {
+      "behavior": 1
+    },
+    "changed_files": [
+      "xarray/tests/test_computation.py"
+    ],
+    "manifest_sha256": "0b5092f3d60acc206b7de32d3a3fa032dcd59f8c704f47e7517358035c81908f"
+  },
+  {
+    "task_id": "PUB-XARRAY-TIMEDELTA",
+    "mode": "fault",
+    "hidden_test_success": false,
+    "primary_rule_ids": [
+      "PUB-XARRAY-TIMEDELTA-HIDDEN"
+    ],
+    "rules": [
+      {
+        "rule_id": "PUB-XARRAY-TIMEDELTA-HIDDEN",
+        "group": "behavior",
+        "status": "FAIL",
+        "severity": "critical",
+        "command": "python -m pytest -q xarray/tests/test_computation.py::test_polyval[timedelta-False]",
+        "exit_code": 1
+      },
+      {
+        "rule_id": "PUB-XARRAY-TIMEDELTA-SCOPE",
+        "group": "scope",
+        "status": "PASS",
+        "severity": "error",
+        "command": "",
+        "exit_code": null
+      }
+    ],
+    "violations_by_group": {
+      "behavior": 1
+    },
+    "changed_files": [
+      "xarray/tests/test_computation.py"
+    ],
+    "manifest_sha256": "0b5092f3d60acc206b7de32d3a3fa032dcd59f8c704f47e7517358035c81908f"
+  },
+  {
+    "task_id": "PUB-XARRAY-TIMEDELTA",
+    "mode": "reference",
+    "hidden_test_success": true,
+    "primary_rule_ids": [
+      "PUB-XARRAY-TIMEDELTA-HIDDEN"
+    ],
+    "rules": [
+      {
+        "rule_id": "PUB-XARRAY-TIMEDELTA-HIDDEN",
+        "group": "behavior",
+        "status": "PASS",
+        "severity": "critical",
+        "command": "python -m pytest -q xarray/tests/test_computation.py::test_polyval[timedelta-False]",
+        "exit_code": 0
+      },
+      {
+        "rule_id": "PUB-XARRAY-TIMEDELTA-SCOPE",
+        "group": "scope",
+        "status": "PASS",
+        "severity": "error",
+        "command": "",
+        "exit_code": null
+      }
+    ],
+    "violations_by_group": {},
+    "changed_files": [
+      "xarray/core/computation.py",
+      "xarray/tests/test_computation.py"
+    ],
+    "manifest_sha256": "0b5092f3d60acc206b7de32d3a3fa032dcd59f8c704f47e7517358035c81908f"
+  }
+]

@@ -28,6 +28,7 @@ This directory is a shareable export of the starter-kit docs mentioned on that p
 | `workflows/design-with-nfr-flow.json` | `templates/next-idea/workflows/design-with-nfr-flow.json` |
 | `src/agents/slice-context-template.md` | `templates/next-idea/src/agents/slice-context-template.md` |
 | `scripts/check-prerequisites.sh` | `templates/next-idea/scripts/check-prerequisites.sh` |
+| `research/repository-local-decision-context/` | Public study artifact: task cards, de-identified results, evaluator contracts, protocol, analysis code, provenance, and release metadata | Public |
 
 | `OWNERS.md` | `OWNERS.md` |
 

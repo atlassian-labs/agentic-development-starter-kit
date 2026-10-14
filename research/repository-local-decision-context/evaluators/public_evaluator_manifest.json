@@ -1,0 +1,97 @@
+{
+  "spec_version": "2026-09-06.2",
+  "tasks": {
+    "PUB-DJANGO-O2O": {
+      "base": "0ab58c120939093fea90822f376e1866fc714d1f",
+      "test_files": [
+        "tests/schema/tests.py"
+      ],
+      "hidden_command": [
+        "python3",
+        "tests/runtests.py",
+        "schema.tests.SchemaTests.test_add_field_o2o_nullable",
+        "schema.tests.SchemaTests.test_add_field_default_nullable",
+        "schema.tests.SchemaTests.test_alter_field_fk_to_o2o",
+        "schema.tests.SchemaTests.test_alter_field_o2o_to_fk"
+      ],
+      "allowed_prefixes": [
+        "django/db/backends/sqlite3/",
+        "tests/schema/"
+      ],
+      "primary_rule_ids": [
+        "PUB-DJANGO-O2O-HIDDEN"
+      ],
+      "fault_rule_ids": [
+        "PUB-DJANGO-O2O-HIDDEN"
+      ]
+    },
+    "PUB-SKLEARN-OUTPUT": {
+      "base": "2c867b8f822eb7a684f0d5c4359e4426e1c9cfe0",
+      "test_files": [
+        "sklearn/utils/tests/test_set_output.py"
+      ],
+      "hidden_command": [
+        "python",
+        "-m",
+        "pytest",
+        "-q",
+        "sklearn/utils/tests/test_set_output.py::test_set_output_pandas_keep_index"
+      ],
+      "allowed_prefixes": [
+        "sklearn/utils/"
+      ],
+      "primary_rule_ids": [
+        "PUB-SKLEARN-OUTPUT-HIDDEN"
+      ],
+      "fault_rule_ids": [
+        "PUB-SKLEARN-OUTPUT-HIDDEN"
+      ]
+    },
+    "PUB-SPHINX-NAPOLEON": {
+      "base": "5fb51fb1467dc5eea7505402c3c5d9b378d3b441",
+      "test_files": [
+        "tests/test_ext_autodoc_configs.py"
+      ],
+      "hidden_command": [
+        "python",
+        "-m",
+        "pytest",
+        "-q",
+        "tests/test_ext_autodoc_configs.py::test_autodoc_typehints_description_no_undoc"
+      ],
+      "allowed_prefixes": [
+        "sphinx/ext/autodoc/",
+        "tests/test_ext_autodoc_configs.py"
+      ],
+      "primary_rule_ids": [
+        "PUB-SPHINX-NAPOLEON-HIDDEN"
+      ],
+      "fault_rule_ids": [
+        "PUB-SPHINX-NAPOLEON-HIDDEN"
+      ]
+    },
+    "PUB-XARRAY-TIMEDELTA": {
+      "base": "6bb2b855498b5c68d7cca8cceb710365d58e6048",
+      "test_files": [
+        "xarray/tests/test_computation.py"
+      ],
+      "hidden_command": [
+        "python",
+        "-m",
+        "pytest",
+        "-q",
+        "xarray/tests/test_computation.py::test_polyval[timedelta-False]"
+      ],
+      "allowed_prefixes": [
+        "xarray/core/",
+        "xarray/tests/test_computation.py"
+      ],
+      "primary_rule_ids": [
+        "PUB-XARRAY-TIMEDELTA-HIDDEN"
+      ],
+      "fault_rule_ids": [
+        "PUB-XARRAY-TIMEDELTA-HIDDEN"
+      ]
+    }
+  }
+}

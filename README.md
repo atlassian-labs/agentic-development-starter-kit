@@ -281,6 +281,10 @@ curl -X POST http://localhost:4000/api/workflow-runs \
   -d '{"story_id": 123, "workflow_key": "plan-execute-review"}'
 ```
 
+## Research artifacts
+
+- [Repository-Local Decision Context for Software Agents](research/repository-local-decision-context/) — Public task cards, de-identified results, evaluator contracts, protocol records, and reproduction code for an exploratory coding-agent study. Archived at [Zenodo](https://doi.org/10.5281/zenodo.22885563).
+
 ---
 
 *Template created from real agentic-first delivery lessons — April 2026.*

@@ -1,0 +1,42 @@
+{
+  "reserved_doi": "10.5281/zenodo.22885563",
+  "status": "draft_not_published",
+  "metadata": {
+    "title": "Repository-Local Decision Context for Software Agents: Public Study Artifacts",
+    "resource_type": "dataset",
+    "version": "1.0.0",
+    "language": "eng",
+    "access_right": "open",
+    "license": "MIT",
+    "creators": [
+      {
+        "name": "Bableshwar, Prasanna",
+        "affiliation": "Atlassian Corporation",
+        "orcid": "0009-0004-6477-8046"
+      }
+    ],
+    "description": "Public, de-identified artifacts for an exploratory empirical study of repository-local decision context and bounded reviewer interaction for software agents. The release will include public task cards, evaluator specifications, protocol and deviation records, aggregate and public-run results, analysis code, and reproduction instructions. Seven outcomes from an earlier invalid specification are quarantined and excluded. Internal repositories, tasks, identifiers, prompts, patches, traces, employee data, and restricted implementation details are not included.",
+    "keywords": [
+      "autonomous software agents",
+      "coding agents",
+      "decision context",
+      "multi-agent systems",
+      "agent evaluation",
+      "software engineering"
+    ],
+    "related_identifiers": [
+      {
+        "identifier": "https://github.com/atlassian-labs/agentic-development-starter-kit",
+        "relation": "isSupplementTo",
+        "scheme": "url",
+        "resource_type": "software"
+      }
+    ]
+  },
+  "pending_before_publication": [
+    "Upload the audited public-only release bundle.",
+    "Add the merged Git commit SHA and stable Git tag.",
+    "Confirm the final publication date.",
+    "Publish the Zenodo record only after all redaction and reproduction audits pass."
+  ]
+}
