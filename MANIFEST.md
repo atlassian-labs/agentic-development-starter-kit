@@ -37,5 +37,4 @@ This directory is a shareable export of the starter-kit docs mentioned on that p
 | Path | Purpose |
 |---|---|
 | `docs/adr/ADR-011-opentelemetry-workflow-tracing.md` | OpenTelemetry span, privacy, and export decision |
-| `docs/cncf/` | CNCF implementation plan, proposals, and complete article drafts |
 | `examples/otel-agent-workflows/` | Executable workflow-tracing and performance-diagnosis example |

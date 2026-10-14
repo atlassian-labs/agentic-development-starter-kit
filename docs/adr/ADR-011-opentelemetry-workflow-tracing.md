@@ -83,7 +83,7 @@ Useful for local debugging but insufficient for parent/child timing, causal rela
 
 ### Adopt a model-provider-specific tracing SDK
 
-Rejected. The starter kit is provider-neutral, and the CNCF article requires an OpenTelemetry-centered example.
+Rejected. The starter kit should remain backend-neutral, and OpenTelemetry provides a portable trace model and export path.
 
 ## Consequences
 
