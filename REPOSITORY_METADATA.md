@@ -16,3 +16,6 @@ No separate website is required for the starter kit. The repository README is th
 - documentation
 - adr
 - workflow-automation
+- opentelemetry
+- observability
+- cloud-native-ai

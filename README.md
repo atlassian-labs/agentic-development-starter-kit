@@ -235,6 +235,31 @@ Full post-mortem: included in this starter-kit documentation.
 
 ---
 
+## OpenTelemetry Examples
+
+The optional [`examples/otel-agent-workflows`](examples/otel-agent-workflows) package demonstrates two observability patterns:
+
+- tracing `plan → execute → review` workflows, including tool calls, bounce-backs, failures, and human checkpoints;
+- diagnosing a seeded N+1 performance problem and verifying the batch-query fix from trace shape and duration.
+
+The example uses OpenTelemetry with in-memory tests and optional OTLP export to a local Collector and Jaeger. It does not call an LLM or require access to private systems.
+
+```bash
+cd examples/otel-agent-workflows
+npm install
+npm test
+npm run diagnose:local
+```
+
+See [ADR-011](docs/adr/ADR-011-opentelemetry-workflow-tracing.md) for the span and privacy contract.
+
+Two CNCF article drafts use the example:
+
+- [Tests Passed. The Trace Still Found an N+1 Query.](docs/cncf/ARTICLE-01-OTEL-PERFORMANCE-DEBUGGING.md)
+- [Tracing Plan, Execute, and Review Agent Workflows with OpenTelemetry](docs/cncf/ARTICLE-02-OTEL-WORKFLOW-TRACING.md)
+
+---
+
 ## Quick Reference
 
 ```bash
