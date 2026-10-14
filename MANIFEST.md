@@ -30,3 +30,11 @@ This directory is a shareable export of the starter-kit docs mentioned on that p
 | `scripts/check-prerequisites.sh` | `templates/next-idea/scripts/check-prerequisites.sh` |
 
 | `OWNERS.md` | `OWNERS.md` |
+
+## Public examples added after the initial export
+
+| Path | Purpose |
+|---|---|
+| `docs/adr/ADR-011-opentelemetry-workflow-tracing.md` | OpenTelemetry span, privacy, and export decision |
+| `docs/cncf/` | CNCF implementation plan, proposals, and complete article drafts |
+| `examples/otel-agent-workflows/` | Executable workflow-tracing and performance-diagnosis example |
