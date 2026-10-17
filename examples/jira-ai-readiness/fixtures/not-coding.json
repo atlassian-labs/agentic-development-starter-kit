@@ -1,0 +1,6 @@
+{
+  "ticket": { "key": "DEMO-404", "updatedAt": "2026-10-04T08:00:00Z" },
+  "stage": "specification",
+  "classification": "not_coding",
+  "evidence": { "linkedDocuments": [], "commits": [] }
+}
