@@ -255,6 +255,24 @@ See [ADR-011](docs/adr/ADR-011-opentelemetry-workflow-tracing.md) for the span a
 
 ---
 
+## Jira AI Readiness Scorer
+
+A prepared repository can't rescue an ambiguous ticket. Before an agent picks up a Jira ticket, score whether it can be implemented and verified without inventing product behavior or architecture.
+
+- [`docs/ai/jira-ai-readiness-scorer.md`](docs/ai/jira-ai-readiness-scorer.md): the rubric. Classification first, two stages, seven weighted dimensions, hard caps at 49 and 69, bands, and evidence-fingerprint approval.
+- [`src/agents/skills/jira-ai-readiness/SKILL.md`](src/agents/skills/jira-ai-readiness/SKILL.md): the agent skill that gathers evidence and rates each dimension.
+- [`examples/jira-ai-readiness`](examples/jira-ai-readiness): a dependency-free scorer that turns those ratings into a deterministic score and a Jira comment.
+
+```bash
+cd examples/jira-ai-readiness
+npm test
+npm run score:design   # 81 capped at 49: the UI design is not approved
+```
+
+See [ADR-012](docs/adr/ADR-012-ticket-readiness-gate.md) for why readiness and coding are separate steps.
+
+---
+
 ## Quick Reference
 
 ```bash

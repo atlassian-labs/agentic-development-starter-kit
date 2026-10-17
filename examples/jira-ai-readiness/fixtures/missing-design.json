@@ -1,0 +1,26 @@
+{
+  "ticket": { "key": "DEMO-202", "updatedAt": "2026-10-02T14:30:00Z" },
+  "stage": "implementation",
+  "classification": "applicable",
+  "ratings": {
+    "problemDefinition": { "rating": 5, "evidence": "Clear user problem and persona." },
+    "behavioralSpecification": { "rating": 4, "evidence": "Acceptance criteria exist, but the interaction depends on an unapproved design." },
+    "technicalDiscoverability": { "rating": 4, "evidence": "UI component and API located on the canonical branch." },
+    "verification": { "rating": 4, "evidence": "Component test conventions identified." },
+    "dependenciesAndEnvironment": { "rating": 4, "evidence": "Staging environment available." },
+    "scopeAndDecomposition": { "rating": 4, "evidence": "Single UI surface." },
+    "riskAndGovernance": { "rating": 3, "evidence": "User-facing change; rollout plan not yet written." }
+  },
+  "blockers": [
+    {
+      "id": "missing_decision",
+      "evidence": "The linked design page is marked draft and has no approval.",
+      "smallestFix": "Link an approved interaction design for the edit flow."
+    }
+  ],
+  "evidence": {
+    "repositoryInspected": true,
+    "linkedDocuments": [{ "id": "design-edit-flow", "version": 7 }],
+    "commits": [{ "repository": "example-ui", "sha": "9be0d33" }]
+  }
+}

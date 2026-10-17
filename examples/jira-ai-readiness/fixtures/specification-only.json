@@ -1,0 +1,20 @@
+{
+  "ticket": { "key": "DEMO-303", "updatedAt": "2026-10-03T11:15:00Z" },
+  "stage": "specification",
+  "classification": "applicable",
+  "ratings": {
+    "problemDefinition": { "rating": 5, "evidence": "Problem, persona and success measure are explicit." },
+    "behavioralSpecification": { "rating": 5, "evidence": "Testable criteria, edge cases and non-goals are listed." },
+    "technicalDiscoverability": { "rating": 3, "evidence": "Repository named in the ticket but not yet inspected." },
+    "verification": { "rating": 4, "evidence": "Expected tests described in the ticket." },
+    "dependenciesAndEnvironment": { "rating": 4, "evidence": "Dependency ticket is done." },
+    "scopeAndDecomposition": { "rating": 5, "evidence": "One reviewable change." },
+    "riskAndGovernance": { "rating": 4, "evidence": "Feature gate named." }
+  },
+  "blockers": [],
+  "evidence": {
+    "repositoryInspected": false,
+    "linkedDocuments": [{ "id": "product-brief", "version": 3 }],
+    "commits": []
+  }
+}

@@ -25,6 +25,10 @@ jobs:
           test -f OWNERS.md
           test -f MANIFEST.md
           test -f EXTERNAL_SHARE_CHECKLIST.md
+      - name: Run readiness scorer tests
+        shell: bash
+        working-directory: examples/jira-ai-readiness
+        run: node --test
       - name: Check for private/internal references
         shell: bash
         run: |

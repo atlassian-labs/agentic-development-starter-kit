@@ -38,3 +38,7 @@ This directory is a shareable export of the starter-kit docs mentioned on that p
 |---|---|
 | `docs/adr/ADR-011-opentelemetry-workflow-tracing.md` | OpenTelemetry span, privacy, and export decision |
 | `examples/otel-agent-workflows/` | Executable workflow-tracing and performance-diagnosis example |
+| `docs/adr/ADR-012-ticket-readiness-gate.md` | Readiness gate before agent pickup |
+| `docs/ai/jira-ai-readiness-scorer.md` | Jira AI coding readiness rubric, version 3 |
+| `src/agents/skills/jira-ai-readiness/SKILL.md` | Agent skill for gathering readiness evidence |
+| `examples/jira-ai-readiness/` | Deterministic readiness scorer with fixtures and tests |

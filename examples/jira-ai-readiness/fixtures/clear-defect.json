@@ -1,0 +1,20 @@
+{
+  "ticket": { "key": "DEMO-101", "updatedAt": "2026-10-01T09:00:00Z" },
+  "stage": "implementation",
+  "classification": "applicable",
+  "ratings": {
+    "problemDefinition": { "rating": 5, "evidence": "Bug states current and expected behavior with a reproduction." },
+    "behavioralSpecification": { "rating": 5, "evidence": "Acceptance criteria cover the empty-list and duplicate cases; non-goals listed." },
+    "technicalDiscoverability": { "rating": 4, "evidence": "Owning service and handler confirmed on the canonical branch." },
+    "verification": { "rating": 5, "evidence": "Failing test reproduces the defect; repository test command documented." },
+    "dependenciesAndEnvironment": { "rating": 5, "evidence": "No linked dependencies; local environment sufficient." },
+    "scopeAndDecomposition": { "rating": 5, "evidence": "One service, one reviewable pull request." },
+    "riskAndGovernance": { "rating": 4, "evidence": "Low-risk change behind an existing feature gate." }
+  },
+  "blockers": [],
+  "evidence": {
+    "repositoryInspected": true,
+    "linkedDocuments": [],
+    "commits": [{ "repository": "example-service", "sha": "4f2c9a1" }]
+  }
+}
