@@ -4,6 +4,22 @@
 
 ---
 
+## Working on this starter kit
+
+This repository contains templates plus standalone examples, not the illustrative
+host application described below. Do not invent missing host classes or run its
+placeholder server/setup commands. Use each example's README and actual files:
+
+- `node --test examples/jira-ai-readiness/test/*.test.js scripts/test-*.js`
+- `python3 -m unittest discover -s examples/activity-snapshot-contract -v`
+
+Stack-specific rules below are sample host policy to adapt. They do not prohibit
+an explicitly documented standalone example's stack. Read the example context,
+linked decision and tests first; write failing tests before implementation.
+For data changes, identify the canonical owner, event/snapshot/patch semantics,
+consumers, decision link and regression test. Stop rather than infer missing rules.
+Workflow JSON is advisory until a host enforces its documented contracts.
+
 ## Pre-Task Checklist (Do This First — Every Time)
 
 Before implementing anything, read these files in order:

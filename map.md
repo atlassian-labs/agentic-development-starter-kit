@@ -4,6 +4,18 @@
 
 ---
 
+## Current starter-kit inventory
+
+This section describes shipped files. The application map below is a template to
+replace with your own repository; its example services are not implemented here.
+
+| Area | Code/context | Decision and verification |
+| --- | --- | --- |
+| Readiness scorer | `examples/jira-ai-readiness/src/score.js` | `docs/adr/ADR-012-ticket-readiness-gate.md`; `examples/jira-ai-readiness/test/` |
+| Activity/snapshot example | `examples/activity-snapshot-contract/context.md`, `contract_store.py` | `docs/adr/ADR-013-activity-snapshot-contract.md`; `test_contract.py` in the example |
+| Workflow templates | `workflows/plan-execute-review.json`, `workflows/design-with-nfr-flow.json` | `docs/workflow-contracts.md`; `scripts/test-workflow-contracts.js` |
+| Tracing example | `examples/otel-agent-workflows/README.md` | `docs/adr/ADR-011-opentelemetry-workflow-tracing.md`; its local test directory |
+
 ## Project Overview
 
 **[YOUR PROJECT NAME]** — [ONE PARAGRAPH: what it does, who uses it, key capabilities]

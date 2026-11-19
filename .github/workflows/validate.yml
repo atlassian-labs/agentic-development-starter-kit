@@ -25,10 +25,20 @@ jobs:
           test -f OWNERS.md
           test -f MANIFEST.md
           test -f EXTERNAL_SHARE_CHECKLIST.md
-      - name: Run readiness scorer tests
+      - name: Set up Node
+        uses: actions/setup-node@v4
+        with:
+          node-version: '20'
+      - name: Set up Python
+        uses: actions/setup-python@v5
+        with:
+          python-version: '3.11'
+      - name: Run scorer, workflow and public-link tests
         shell: bash
-        working-directory: examples/jira-ai-readiness
-        run: node --test
+        run: node --test examples/jira-ai-readiness/test/*.test.js scripts/test-*.js
+      - name: Run persisted-data contract example
+        shell: bash
+        run: python3 -m unittest discover -s examples/activity-snapshot-contract -v
       - name: Check for private/internal references
         shell: bash
         run: |
