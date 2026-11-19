@@ -1,49 +1,69 @@
 {
   "key": "plan-execute-review",
-  "name": "Plan → Execute → Review",
-  "description": "Standard 3-stage workflow for coding stories. Agent plans, implements, and raises a PR. Reviewer checks quality. Bounce-back up to 3x if issues found.",
+  "name": "Readiness → Plan → Approve → Execute → Review",
+  "description": "Workflow template, not an authorization implementation. The host runner must enforce read-only discovery, authorized approval of current evidence, and reapproval on every retry. See docs/workflow-contracts.md.",
   "stages": [
     {
+      "key": "readiness",
+      "name": "Readiness discovery",
+      "agent": "readiness-scorer",
+      "is_human_checkpoint": false,
+      "is_read_only": true,
+      "output_format": "markdown",
+      "prompt_mode": "replace",
+      "prompt": "## CONTEXT RESET\nEvaluate {{story_title}} for {{project_name}} at {{source_url}}. This stage is read-only: no branch, commit, repository edits or coding session. Follow docs/ai/jira-ai-readiness-scorer.md and src/agents/skills/jira-ai-readiness/SKILL.md. Read current ticket and linked decisions, inspect canonical code, tests and consumers within the rubric's bounds. Identify the state owner, existing models/APIs, snapshot/event/patch semantics and unresolved conflicts. Record ticket timestamp, document versions and actual inspected commits. Classify before scoring; use examples/jira-ai-readiness/bin/score.js for deterministic scoring and fingerprinting, not an invented percentage or hash. Report the evidence, blockers, smallest fixes and result. STOP and escalate missing required evidence. A readiness score is not authorization. On a retry, include review feedback and changed evidence; do not reuse the earlier approval."
+    },
+    {
       "key": "plan",
-      "name": "📋 Plan",
+      "name": "Read-only plan",
       "agent": "planner",
       "is_human_checkpoint": false,
+      "is_read_only": true,
       "output_format": "markdown",
-      "bounce_target": null,
       "prompt_mode": "replace",
-      "prompt": "## CONTEXT RESET — IGNORE ALL PRIOR CONVERSATION\n\nYou are a senior {{tech_stack}} engineer working on {{project_name}}.\nRepository: {{source_url}}\nYou are NOT working on any other project. Do not discuss any unrelated project.\n\n## Your Task\nWrite a technical implementation plan for: {{story_title}}\n\n## Context\n- Repository: {{source_url}}\n- Slice context: {{context_md}}\n- Sub-tasks:\n{{tasks}}\n- Referenced ADRs: {{adrs}}\n- Existing related code: {{related_files}}\n\n## The Plan Must Include\n1. TL;DR (2-3 sentences)\n2. Files to create (with purpose)\n3. Files to modify (with what changes)\n4. Key design decisions\n5. Test strategy\n6. Dependencies on other stories\n7. Success criteria (measurable)\n\n## Output\nA markdown plan. No preamble. Begin with '# Plan: {{story_title}}'."
+      "prompt": "## CONTEXT RESET\nPlan {{story_title}} for {{project_name}} at {{source_url}}. Read-only analysis only; no repository mutation or coding.\nReadiness: {{readiness_artifact}}\nSlice context: {{context_md}}\nTasks: {{tasks}}\nDecisions: {{adrs}}\nRelated code: {{related_files}}\nPropose a bounded plan: existing code to reuse, files to change, state owners and consumers, preserved contracts, named tests at the relevant boundary, dependencies, rollout and rollback. Link each consequential decision to affected code and a verification step. Distinguish mocked tests from persisted-data/consumer checks. STOP on missing or conflicting requirements. Submit the plan and evidence for human approval; do not resolve architectural ambiguity by guessing."
+    },
+    {
+      "key": "pre-code-approval",
+      "name": "Human approval before coding",
+      "agent": null,
+      "is_human_checkpoint": true,
+      "output_format": "text",
+      "prompt_mode": "replace",
+      "bounce_target": "readiness",
+      "prompt": "Review {{story_title}}.\nReadiness: {{readiness_artifact}}\nPlan: {{plan_artifact}}\nThe host runner must authenticate and authorize the reviewer, reread current evidence, recompute the score/fingerprint and show the exact plan being approved. Accept only an explicit approve, bounce or escalate decision with rationale. Record reviewer identity, decision, time, evidence fingerprint, rubric version and plan hash in a trusted audit store. Reject stale, missing, non-coding-band or specification-only evidence. Record named checkpoints for AI Assisted work. If evidence or plan changed, bounce to readiness; never advance on missing input. These requirements must be implemented by the host runner; this template alone cannot enforce them."
     },
     {
       "key": "execute",
-      "name": "⚙️ Execute",
+      "name": "Implement approved plan",
       "agent": "coder",
       "is_human_checkpoint": false,
       "output_format": "markdown",
-      "bounce_target": "execute",
       "prompt_mode": "replace",
-      "prompt": "## CONTEXT RESET — IGNORE ALL PRIOR CONVERSATION\n\nYou are a senior {{tech_stack}} engineer implementing {{story_title}} for {{project_name}}.\nRepository: {{source_url}}\nYou are NOT working on any other project.\n\n## Implementation Plan\n{{plan_artifact}}\n\n## Rules\n- Read the slice context.md first: {{context_md_path}}\n- Follow existing code patterns — read similar files before writing new ones\n- No mock data in production code paths\n- Parameterized SQL only: db.run('SELECT * WHERE id = ?', [id])\n- If output exceeds 8000 tokens, split into parts with continuation comments\n- Run npm test before exiting — all tests must pass\n- Raise a PR when done: branch name {{work_item_key}}-short-description\n\n## Done Criteria\n- [ ] npm test passes with 0 failures\n- [ ] PR raised against {{target_branch}}\n- [ ] No files touched outside {{slice_directory}}\n\nBegin with the first file from the plan. Do NOT ask questions."
+      "bounce_target": "readiness",
+      "prompt": "## CONTEXT RESET\nImplement {{story_title}} for {{project_name}} at {{source_url}} only after the host verifies the approval.\nApproval: {{approval_artifact}}\nReadiness: {{readiness_artifact}}\nPlan: {{plan_artifact}}\nRead {{context_md_path}} and referenced decisions. Work within {{slice_directory}}. Follow the repository's stack and commands, reuse canonical owners/models, and verify contracts with the approved tests. Use parameterized queries where applicable; do not add real secrets or private data to examples. STOP and ask on missing/changed evidence, ambiguous behavior, failed authorization or changed plan; return to readiness for fresh approval before another coding attempt. Report actual test commands/results, including failures or checks not run. Open a draft pull request against {{target_branch}} on an authorized {{work_item_key}}-short-description branch. Never auto-merge. Keep the draft linked to the approved evidence; an agent must not authorize itself."
     },
     {
       "key": "review",
-      "name": "🔍 Review",
+      "name": "Review implementation",
       "agent": "reviewer",
       "is_human_checkpoint": false,
-      "output_format": "markdown",
-      "bounce_target": "execute",
+      "output_format": "json",
       "prompt_mode": "replace",
-      "prompt": "## CONTEXT RESET — IGNORE ALL PRIOR CONVERSATION\n\nYou are a senior {{tech_stack}} engineer reviewing a PR for {{project_name}}.\nPR: {{pr_url}}\nStory: {{story_title}}\nYou are NOT working on any other project.\n\n## Review Criteria\n1. Correctness — implements acceptance criteria: {{acceptance_criteria}}\n2. Security — no hardcoded credentials, no SQL injection, no mock data in production\n3. Test coverage — critical paths and error cases tested\n4. Code style — CommonJS, async/await, parameterized SQL\n5. API compatibility — no breaking changes to existing contracts\n\n## Output Format\nJSON ONLY — no other text:\n{\n  \"verdict\": \"approve\" | \"bounce\" | \"escalate\",\n  \"summary\": \"2-3 sentence assessment\",\n  \"issues\": [\n    {\n      \"severity\": \"MUST_FIX\" | \"OPTIONAL\",\n      \"file\": \"path/to/file.js\",\n      \"line\": 42,\n      \"issue\": \"description\",\n      \"fix\": \"specific instruction\"\n    }\n  ]\n}"
+      "bounce_target": "readiness",
+      "prompt": "## CONTEXT RESET\nReview {{pr_url}} for {{story_title}} in {{project_name}}. Verify acceptance criteria {{acceptance_criteria}}, approved plan/evidence, state ownership, data semantics, consumers and regression tests. Distinguish actual persisted-data coverage from mocked calls. Check security, compatibility and repository style. Do not invent successful checks. Output JSON only: {\"verdict\": \"approve|bounce|escalate\", \"summary\": \"assessment\", \"issues\": [{\"severity\": \"MUST_FIX|OPTIONAL\", \"file\": \"path\", \"issue\": \"description\", \"fix\": \"action\"}]}. A bounce returns to readiness and human approval before further coding. This review verdict is advisory; it is not permission to merge."
     },
     {
       "key": "done",
-      "name": "✅ Done",
+      "name": "Draft ready for human review",
       "agent": null,
       "is_human_checkpoint": false,
       "output_format": "markdown",
       "prompt_mode": "replace",
-      "prompt": "Story {{story_title}} ({{work_item_key}}) is complete.\n\nPR: {{pr_url}}\nBranch: {{branch_name}}\n\nSummary of what was built:\n{{execute_artifact}}\n\nAll tests passing. Ready for merge."
+      "prompt": "Draft PR: {{pr_url}}\nBranch: {{branch_name}}\nImplementation and verification report: {{execute_artifact}}\nReport only verified results. Leave merge and release decisions to authorized humans."
     }
   ],
   "bounce_limit": 3,
   "escalation_action": "notify_human",
-  "vibe_mode_compatible": true
+  "vibe_mode_compatible": false
 }

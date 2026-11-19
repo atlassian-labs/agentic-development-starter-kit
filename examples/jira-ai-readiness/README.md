@@ -60,6 +60,9 @@ Requires Node 18 or later. There is nothing to install.
 
 - `stage`: `specification` or `implementation`
 - `classification`: `applicable`, `needs_decomposition`, `human_led`, `already_underway`, `already_implemented` or `not_coding`
+- Applicable Implementation Readiness requires `evidence.repositoryInspected` to be exactly `true` and at least one `commits` entry with a nonblank repository and a hexadecimal commit ID (7–64 characters). Use the full canonical hash when available. Missing, null, malformed or truthy-string inspection evidence is rejected; the scorer does not silently grant a Ready result.
+- Document references require an ID and version. Specification and N/A runs do not require inspected commits, but supplied evidence must be well formed.
+- The analyzer must establish that commits really are canonical and documents were read; structural validation cannot prove evidence truth.
 - Blocker IDs are listed in [`src/score.js`](src/score.js) under `BLOCKERS`.
 
 Set `ticket.readable` to `false` when the ticket could not be read. The scorer then refuses to produce a score.
@@ -75,4 +78,8 @@ const result = scoreTicket(input);
 isApprovalFresh(currentResult, storedApproval); // false if anything changed
 ```
 
-`isApprovalFresh` returns `true` only for an Implementation Readiness result in the AI Ready or AI Assisted band whose fingerprint matches the stored approval.
+`isApprovalFresh` compares a scorer result with stored fingerprint/rubric metadata. It does not authenticate or authorize the approver, fetch current evidence, audit an approval, or start a coding session. `codingAllowed` means readiness eligibility, not permission.
+
+Fingerprint format 2 also binds classification, inspection state, ratings/evidence statements, blockers, overrides and inaccessible references. Reordering document/commit lists is immaterial; changing the assessment invalidates earlier approval even when source versions stay the same. Existing stored fingerprints must be re-evaluated and approved after this upgrade. Rubric weights and thresholds remain version 3.
+
+The caller must refresh evidence and validate authority separately, bind the approved workflow plan, and reject stale or missing approval immediately before coding. See [workflow contracts](../../docs/workflow-contracts.md).

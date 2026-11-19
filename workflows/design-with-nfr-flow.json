@@ -1,8 +1,18 @@
 {
   "key": "design-with-nfr-flow",
   "name": "Design + NFR Flow",
-  "description": "Full design workflow with NFR analysis, data model, API spec, diagrams, ADRs, and design doc. For architecture/design stories that produce documents, not code.",
+  "description": "Full design workflow with discovery, NFR analysis, data model, API spec, diagrams, ADRs, and design doc. For architecture/design stories that produce documents, not code.",
   "stages": [
+    {
+      "key": "discovery",
+      "name": "🔍 Discovery & Constraints",
+      "agent": "architect",
+      "is_human_checkpoint": false,
+      "is_read_only": true,
+      "output_format": "markdown",
+      "prompt_mode": "replace",
+      "prompt": "## CONTEXT RESET — IGNORE ALL PRIOR CONVERSATION\n\nYou are a senior architect conducting discovery for: {{component_name}}\nProject: {{project_name}}\nRepository: {{source_url}}\n\n## Task\nConduct a read-only discovery of existing code, schemas, and APIs relevant to {{component_name}}. Do NOT propose new design — only document what exists.\n\n## Discovery Report\n1. **Existing Canonical Owners & APIs**\n   - [ ] What services/components already own this domain?\n   - [ ] What APIs or contracts already exist?\n   - [ ] What data already exists in the database?\n   \n2. **Schema & Data Model**\n   - [ ] Current tables related to {{component_name}}\n   - [ ] Relationships and constraints\n   - [ ] Migration history (if applicable)\n   - [ ] Existing indexes and partitioning\n   \n3. **Reader/Consumer Dependencies**\n   - [ ] What services read this data?\n   - [ ] What consumers depend on the current schema?\n   - [ ] What breaking changes would impact production?\n   \n4. **Reuse & Migration Opportunities**\n   - [ ] Can existing tables be extended instead of creating new ones?\n   - [ ] What data migration strategy must we preserve?\n   - [ ] What backward compatibility constraints exist?\n   \n5. **Known Constraints & Gotchas**\n   - [ ] Performance characteristics (known bottlenecks)\n   - [ ] Security/compliance constraints\n   - [ ] Operational constraints (downtime windows, rollout strategy)\n\n## Output\nMarkdown discovery report. Begin with '# Discovery: {{component_name}}'\n\nDo NOT propose solutions — only state what exists today and what constraints must be respected. Use current repository schemas and approved synthetic examples, not unrestricted production data. Record canonical commits, source decisions and consumers. Define whether each record is a snapshot, event or patch and what omitted, null and empty fields mean. STOP on unknown ownership or conflicting contracts; ask the responsible human rather than inventing a rule."
+    },
     {
       "key": "nfr-analysis",
       "name": "📊 NFR Analysis",
@@ -19,7 +29,7 @@
       "is_human_checkpoint": false,
       "output_format": "markdown",
       "prompt_mode": "replace",
-      "prompt": "## CONTEXT RESET\n\nYou are a senior data engineer designing the data model for {{component_name}} in {{project_name}}.\n\n## Context\nNFR Analysis:\n{{nfr_artifact}}\n\nStory: {{story_title}}\n{{story_description}}\n\n## Produce\n1. **Entity relationship diagram** (Mermaid erDiagram)\n2. **Table definitions** (SQL CREATE TABLE with all fields, types, indexes, constraints)\n3. **Key design decisions** (normalisation choices, indexing strategy, partitioning)\n4. **Migration strategy** (how existing data migrates if applicable)\n\nOutput: markdown with embedded Mermaid. Begin with '# Data Model: {{component_name}}'."
+      "prompt": "## CONTEXT RESET\n\nYou are a senior data engineer designing the data model for {{component_name}} in {{project_name}}.\n\n## Context\nDiscovery Report:\n{{discovery_artifact}}\n\nNFR Analysis:\n{{nfr_artifact}}\n\nStory: {{story_title}}\n{{story_description}}\n\n## Produce\n1. **Decision Rationale** — Why this data model?\n   - [ ] Reuse vs. new tables (per discovery)\n   - [ ] Backward compatibility strategy\n   - [ ] Migration path for existing data (or explain why migration is not needed)\n   \n2. **Entity relationship diagram** (Mermaid erDiagram)\n\n3. **Table definitions** (SQL CREATE TABLE with all fields, types, indexes, constraints)\n   - For modified tables: document what fields are added/changed\n   - For new tables: explicitly state if this breaks any existing consumer\n   \n4. **Key design decisions**\n   - Normalisation choices and trade-offs\n   - Indexing strategy aligned with NFRs\n   - Partitioning approach (if applicable)\n   \n5. **Migration Strategy**\n   - How existing data migrates to new schema (explicit steps)\n   - Backward compatibility window (if applicable)\n   - Rollback plan\n\nOutput: markdown with embedded Mermaid. Begin with '# Data Model: {{component_name}}'."
     },
     {
       "key": "api-spec",
@@ -59,11 +69,19 @@
     },
     {
       "key": "review",
-      "name": "👤 Human Review",
+      "name": "👤 Human Review & Approval",
       "agent": null,
       "is_human_checkpoint": true,
+      "approval_required": true,
       "output_format": "text",
-      "prompt": "Please review the design document for {{component_name}}.\n\nThe full design document is shown above.\n\nCheck:\n1. Does the proposed architecture align with your vision?\n2. Are the NFRs appropriate for the expected scale?\n3. Are there any open questions that block implementation?\n4. Should any ADRs be changed before implementation begins?\n\nApprove to proceed to implementation, or add feedback to bounce back for revisions."
+      "required_inputs": ["decision", "reviewer_rationale", "design_fingerprint"],
+      "bounce_target": "discovery",
+      "runner_adapter_requirements": {
+        "auth": "Reviewer must authenticate with identity tied to audit logs (per ADR-009)",
+        "current_evidence": "Runner must fetch current design artifacts before showing checkpoint",
+        "audit": "Runner MUST log reviewer decision, rationale, artifact hash, and timestamp for compliance"
+      },
+      "prompt": "## Design Review & Approval\n\nPlease review the complete design for {{component_name}}.\n\n**Design Documents:**\n- Discovery: {{discovery_artifact}}\n- NFR Analysis: {{nfr_artifact}}\n- Data Model: {{data_model_artifact}}\n- API Spec: {{api_spec_artifact}}\n- Diagrams: {{diagrams_artifact}}\n- ADRs: {{adrs_artifact}}\n- Design Doc: {{design_doc_artifact}}\n\n**Your Task:**\nReview all design artifacts and decide whether to approve for implementation.\n\n**Required Review Checklist:**\n1. Does the proposed architecture align with strategic vision?\n2. Are NFRs appropriate for expected scale and constraints?\n3. Are data model decisions sound and migration paths clear?\n4. Are all open questions answered?\n5. Should any ADRs be changed before implementation?\n\n**Required Inputs:**\n1. **Decision:** approve | bounce | escalate\n   - **approve**: Design is complete and ready for implementation\n   - **bounce**: Design needs revision (specify what to fix)\n   - **escalate**: Blockers or conflicts require management decision\n\n2. **Reviewer Rationale** (minimum 50 characters): Explain your decision\n\n3. **Design Fingerprint** (from design artifacts): Confirm which version you reviewed\n\n**Host integration required:** The runner must authenticate and authorize the reviewer and persist the decision, rationale, artifact version and timestamp. This template does not implement those controls. Missing or stale input must block advancement. Design approval does not authorize coding; run Implementation Readiness and its approval checkpoint separately."
     }
   ],
   "bounce_limit": 2,

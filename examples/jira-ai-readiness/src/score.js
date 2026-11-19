@@ -101,17 +101,62 @@ function validateRatings(ratings) {
 }
 
 function validateBlockers(blockers, overrides) {
+  if (!Array.isArray(blockers) || !Array.isArray(overrides)) fail('blockers and overrides must be arrays');
   for (const [i, blocker] of blockers.entries()) {
+    if (!blocker || typeof blocker !== 'object' || Array.isArray(blocker)) fail(`blockers[${i}] must be an object`);
     if (!Object.hasOwn(BLOCKERS, blocker.id)) fail(`blockers[${i}].id is not a known blocker: ${blocker.id}`);
     requireText(blocker.evidence, `blockers[${i}].evidence`);
     requireText(blocker.smallestFix, `blockers[${i}].smallestFix`);
   }
   for (const [i, override] of overrides.entries()) {
+    if (!override || typeof override !== 'object' || Array.isArray(override)) fail(`overrides[${i}] must be an object`);
     if (!blockers.some((b) => b.id === override.blocker)) {
       fail(`overrides[${i}].blocker does not match a reported blocker: ${override.blocker}`);
     }
     requireText(override.reason, `overrides[${i}].reason`);
     requireText(override.approvedBy, `overrides[${i}].approvedBy`);
+  }
+}
+
+function validateEvidence(input) {
+  const evidence = input.evidence;
+  if (evidence !== undefined && (!evidence || typeof evidence !== 'object' || Array.isArray(evidence))) {
+    fail('evidence must be an object when supplied');
+  }
+  const inspected = evidence || {};
+  const implementation = input.classification === 'applicable' && input.stage === 'implementation';
+  if (implementation && inspected.repositoryInspected !== true) {
+    fail('implementation stage requires evidence.repositoryInspected to be true');
+  }
+  for (const key of ['commits', 'linkedDocuments', 'inaccessible']) {
+    if (inspected[key] !== undefined && !Array.isArray(inspected[key])) {
+      fail(`evidence.${key} must be an array`);
+    }
+  }
+  if (implementation && (!inspected.commits || inspected.commits.length === 0)) {
+    fail('implementation stage requires at least one inspected canonical commit');
+  }
+  for (const [i, commit] of (inspected.commits || []).entries()) {
+    if (!commit || typeof commit !== 'object' || Array.isArray(commit)) {
+      fail(`evidence.commits[${i}] must be an object`);
+    }
+    requireText(commit.repository, `evidence.commits[${i}].repository`);
+    if (typeof commit.sha !== 'string' || !/^[a-f0-9]{7,64}$/i.test(commit.sha)) {
+      fail(`evidence.commits[${i}].sha must be a hexadecimal commit ID (7-64 characters)`);
+    }
+  }
+  for (const [i, doc] of (inspected.linkedDocuments || []).entries()) {
+    if (!doc || typeof doc !== 'object' || Array.isArray(doc)) {
+      fail(`evidence.linkedDocuments[${i}] must be an object`);
+    }
+    requireText(doc.id, `evidence.linkedDocuments[${i}].id`);
+    if (!(typeof doc.version === 'string' && doc.version.trim()) &&
+        !(Number.isInteger(doc.version) && doc.version >= 0)) {
+      fail(`evidence.linkedDocuments[${i}].version must be a version string or non-negative integer`);
+    }
+  }
+  for (const [i, item] of (inspected.inaccessible || []).entries()) {
+    requireText(item, `evidence.inaccessible[${i}]`);
   }
 }
 
@@ -124,8 +169,21 @@ function sortedBy(list, keys) {
 // The fingerprint changes whenever any evidence the decision depends on changes.
 // An approval recorded against an older fingerprint is stale.
 function evidenceFingerprint(input) {
+  validateInput(input);
+  validateEvidence(input);
+  if (input.classification === 'applicable') {
+    validateRatings(input.ratings);
+    validateBlockers(input.blockers || [], input.overrides || []);
+  }
   const evidence = input.evidence || {};
   const canonical = {
+    fingerprintVersion: 2,
+    classification: input.classification,
+    repositoryInspected: evidence.repositoryInspected === true,
+    ratings: Object.keys(DIMENSIONS).map((key) => [key, input.ratings?.[key]?.rating ?? null, input.ratings?.[key]?.evidence ?? null]),
+    blockers: sortedBy(input.blockers || [], ['id', 'evidence', 'smallestFix']),
+    overrides: sortedBy(input.overrides || [], ['blocker', 'approvedBy', 'reason']),
+    inaccessible: [...(evidence.inaccessible || [])].sort(),
     ticketKey: input.ticket.key,
     ticketUpdatedAt: input.ticket.updatedAt,
     rubricVersion: RUBRIC_VERSION,
@@ -169,7 +227,6 @@ function scoreTicket(input) {
 
   // A specification-only run never inspected the repository, so it cannot
   // reach a coding band no matter how strong the ticket text is.
-  const evidence = input.evidence || {};
   if (input.stage === 'specification' && !blockers.some((b) => b.id === 'repository_not_inspected')) {
     blockers.push({
       id: 'repository_not_inspected',
@@ -177,9 +234,6 @@ function scoreTicket(input) {
       smallestFix: 'Run Implementation Readiness with a bounded scan of the canonical branch before AI pickup.',
       automatic: true,
     });
-  }
-  if (input.stage === 'implementation' && evidence.repositoryInspected === false) {
-    fail('implementation stage requires evidence.repositoryInspected to be true');
   }
   validateBlockers(blockers, overrides);
 
@@ -219,7 +273,9 @@ function scoreTicket(input) {
 // Coding may start only when a human approved this exact evidence fingerprint
 // on an Implementation Readiness result in a coding band.
 function isApprovalFresh(result, approval) {
-  if (!approval || !result.codingAllowed) return false;
+  if (!result || !approval || result.codingAllowed !== true) return false;
+  if (typeof result.fingerprint !== 'string' || !/^[0-9a-f]{16}$/.test(result.fingerprint)) return false;
+  if (result.rubricVersion !== RUBRIC_VERSION) return false;
   return approval.fingerprint === result.fingerprint && approval.rubricVersion === result.rubricVersion;
 }
 

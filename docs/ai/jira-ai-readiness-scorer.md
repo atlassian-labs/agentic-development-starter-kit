@@ -57,6 +57,8 @@ The analyzer must not invent owners, repositories, classes, APIs, test commands,
 | Test commands | Repository guidance and build files |
 | Risk and rollout | Runbook, feature gate, migration plan, observability configuration |
 
+The executable example rejects an applicable implementation result unless `repositoryInspected` is explicitly true and at least one valid repository/commit reference is supplied. This validates provenance shape, not evidence truth; the analyzer still verifies canonical sources.
+
 The Implementation Readiness code scan is read-only, limited to two repositories and 30 minutes, and records the commit hash it inspected. It checks whether the requested behavior is absent, partial, complete or conflicting; the owning module or surface; test conventions and commands; open pull requests, feature gates and deployment state; and whether Jira, linked decisions and code agree.
 
 ## Step 3: rate seven dimensions
@@ -108,7 +110,7 @@ Every cap must name its evidence and the smallest ticket edit or decision that r
 
 ## Freshness and approval
 
-Each result carries an evidence fingerprint built from the Jira update time, the rubric version, the stage, linked-document versions and the inspected commit hashes. A human approves a specific fingerprint. If any of those inputs change before coding starts, the approval is stale and Implementation Readiness must run again.
+Each result carries an evidence fingerprint built from the Jira update time, rubric version, stage, linked-document versions and inspected commit hashes. The executable example also binds classification, inspection state, ratings/evidence statements, blockers, overrides and inaccessible references so a revised assessment cannot silently reuse an approval. A human approves a specific fingerprint. If any of those inputs change before coding starts, the approval is stale and Implementation Readiness must run again.
 
 Keep readiness and coding as separate steps:
 

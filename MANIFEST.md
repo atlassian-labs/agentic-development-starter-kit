@@ -42,3 +42,7 @@ This directory is a shareable export of the starter-kit docs mentioned on that p
 | `docs/ai/jira-ai-readiness-scorer.md` | Jira AI coding readiness rubric, version 3 |
 | `src/agents/skills/jira-ai-readiness/SKILL.md` | Agent skill for gathering readiness evidence |
 | `examples/jira-ai-readiness/` | Deterministic readiness scorer with fixtures and tests |
+| `docs/adr/ADR-013-activity-snapshot-contract.md` | Synthetic event/snapshot storage decision with code/test links |
+| `examples/activity-snapshot-contract/` | Standard-library SQLite persisted-data contract example |
+| `docs/workflow-contracts.md` | Static template contracts and required host-runner enforcement |
+| `scripts/workflow-validator.js` / `scripts/test-workflow-contracts.js` | Static template validation and negative regression tests |

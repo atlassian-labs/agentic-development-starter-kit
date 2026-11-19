@@ -31,7 +31,7 @@ function implementationInput(extra = {}) {
     classification: 'applicable',
     ratings: ratingsAll(5),
     blockers: [],
-    evidence: { repositoryInspected: true, linkedDocuments: [], commits: [{ repository: 'svc', sha: 'abc' }] },
+    evidence: { repositoryInspected: true, linkedDocuments: [], commits: [{ repository: 'svc', sha: 'abc1234' }] },
     ...extra,
   };
 }
